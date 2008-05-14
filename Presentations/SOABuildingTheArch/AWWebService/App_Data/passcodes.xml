@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<PassCodes>
+    <PassCode Key="LetMeIn" User="api_user1" />
+    <PassCode Key="LetMeIn2" User="api_user2" />
+</PassCodes>
