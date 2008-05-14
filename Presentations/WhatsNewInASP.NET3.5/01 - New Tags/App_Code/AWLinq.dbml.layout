@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="AWLinq">
+  <DataContextMoniker Name="/AWLinqDataContext" />
+  <nestedChildShapes>
+    <classShape Id="8a9bf00b-0fdb-41d6-b707-d7e404dd2e52" absoluteBounds="0.5, 0.5, 2, 4.0785139973958326">
+      <DataClassMoniker Name="/AWLinqDataContext/Product" />
+      <nestedChildShapes>
+        <elementListCompartment Id="a318efa2-7d16-4a8b-97c6-095f8345741d" absoluteBounds="0.51500000000000057, 0.96, 1.9700000000000002, 3.518513997395833" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

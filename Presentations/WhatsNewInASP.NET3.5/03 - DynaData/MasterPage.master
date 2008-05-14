@@ -1,0 +1,34 @@
+﻿<%@ Master Language="C#" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<script runat="server">
+
+</script>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+    <link href="DynamicDataMedium.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <h1><span class="allcaps">dynamic data controls site</span></h1>
+    <div class="Back"><span class="Back">
+    <a runat="server" href="~/"><img alt="Back to home page" runat="server" src="App_Shared/Images/Back.gif" />Back to home page</a>
+    </span></div>
+
+    <form id="form1" runat="server">
+    <div>
+        <asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true"/>
+        
+        <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+            <ContentTemplate>
+                <asp:ContentPlaceHolder id="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+    </div>
+    </form>
+</body>
+</html>
+
