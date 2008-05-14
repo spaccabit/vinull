@@ -1,0 +1,74 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZenDesign", "ZenDesign\ZenDesign.csproj", "{4EAB74E2-BB46-4649-84D8-7A817C73762F}"
+EndProject
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ZenWebsite", "ZenWebsite\", "{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/ZenWebsite"
+		Debug.AspNetCompiler.PhysicalPath = "ZenWebsite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ZenWebsite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/ZenWebsite"
+		Release.AspNetCompiler.PhysicalPath = "ZenWebsite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ZenWebsite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		VWDPort = "50937"
+		DefaultWebSiteLanguage = "Visual C#"
+	EndProjectSection
+EndProject
+Project("{2CFEAB61-6A3B-4EB8-B523-560B4BEEF521}") = "ZenWebsite_deploy", "ZenWebsite_deploy\ZenWebsite_deploy.wdproj", "{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Release|.NET.ActiveCfg = Release|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4EAB74E2-BB46-4649-84D8-7A817C73762F}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Debug|.NET.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Debug|.NET.Build.0 = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Debug|Mixed Platforms.Build.0 = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Release|.NET.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Release|.NET.Build.0 = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Release|Any CPU.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
+		{D7F81F94-F8A0-4D1D-971E-3AB2336B8E46}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Release|.NET.ActiveCfg = Release|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C98C1B15-0E1B-49CE-84D4-EE5F7D4154E1}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = 
+	EndGlobalSection
+EndGlobal

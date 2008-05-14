@@ -1,0 +1,27 @@
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Main.master.cs" Inherits="Assets_Layout_Pages_Main" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title>Untitled Page</title>
+</head>
+<body class="zen">
+    <form id="form" runat="server">
+        <asp:ScriptManager ID="ScriptManager1" runat="server"></asp:ScriptManager>
+        <Layout:Header ID="lHeader" runat="server" />
+        <Layout:Nav ID="lNav" runat="server" />
+        <!-- start page -->
+        <asp:Panel runat="server" CssClass="page" ID="pPage" >
+            <!-- start content -->
+                <div id="content">
+                    <asp:ContentPlaceHolder ID="cphMain" runat="server"></asp:ContentPlaceHolder>
+                </div>
+            <!-- end content -->
+            <Layout:SideBar ID="lSideBar" runat="server" />
+            <div id="extra" style="clear: both;">
+                &nbsp;</div>
+        </asp:Panel>
+        <!-- end page -->
+        <Layout:Footer ID="lFooter" runat="server" />
+    </form>
+</body>
+</html>

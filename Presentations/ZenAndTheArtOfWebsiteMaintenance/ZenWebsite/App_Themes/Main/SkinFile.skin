@@ -1,0 +1,7 @@
+<asp:DetailsView SkinID="Product" runat="server" BackColor="White" BorderColor="#336666" BorderStyle="Double" BorderWidth="3px" CellPadding="4" GridLines="Horizontal">
+    <FooterStyle BackColor="White" ForeColor="#333333" />
+    <EditRowStyle BackColor="#339966" Font-Bold="True" ForeColor="White" />
+    <RowStyle BackColor="White" ForeColor="#333333" />
+    <PagerStyle BackColor="#336666" ForeColor="White" HorizontalAlign="Center" />
+    <HeaderStyle BackColor="#336666" Font-Bold="True" ForeColor="White" />
+</asp:DetailsView>

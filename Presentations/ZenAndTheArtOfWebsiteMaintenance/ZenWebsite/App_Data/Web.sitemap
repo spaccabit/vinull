@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+  <siteMapNode title="ZenDemo" description="Zen and the Art of Website Maintenance" roles="*">
+    <siteMapNode url="~/Default.aspx" title="Home" />
+    <siteMapNode provider="PhotoSiteMapProvider"/>
+    <siteMapNode url="~/Store/Default.aspx" title="Products"/>
+    <siteMapNode url="~/Site/About.aspx" title="About" />
+    <siteMapNode url="~/Admin/Default.aspx" title="Admin" />
+  </siteMapNode>
+</siteMap>
