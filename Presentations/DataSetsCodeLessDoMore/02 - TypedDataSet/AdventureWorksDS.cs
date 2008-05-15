@@ -53,3 +53,15 @@ namespace _02___TypedDataSet.AdventureWorksDSTableAdapters {
         }
     }
 }
+namespace _02___TypedDataSet {
+    
+    
+    public partial class AdventureWorksDS {
+    }
+}
+namespace _02___TypedDataSet {
+    
+    
+    public partial class AdventureWorksDS {
+    }
+}

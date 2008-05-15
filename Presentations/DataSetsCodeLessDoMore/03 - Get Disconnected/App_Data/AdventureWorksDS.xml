@@ -2,7 +2,7 @@
 <AdventureWorksDS xmlns="http://tempuri.org/AdventureWorksDS.xsd">
   <ProductModel>
     <ProductModelID>1</ProductModelID>
-    <Name>Classic Vest Blue</Name>
+    <Name>Classic Vest Blue - Changed</Name>
     <rowguid>29321d47-1e4c-4aac-887c-19634328c25e</rowguid>
     <ModifiedDate>2003-06-01T00:00:00-04:00</ModifiedDate>
   </ProductModel>
