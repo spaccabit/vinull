@@ -86,7 +86,7 @@ namespace ConsoleSearch {
                 Console.Write(String.Format("Adding {0}...   ", p.ProductNumber));
 
                 Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
-                doc.Add(new Lucene.Net.Documents.Field("sku", p.ProductNumber, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NO));
+                doc.Add(new Lucene.Net.Documents.Field("sku", p.ProductNumber, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("_searchtxt", searchText, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("price", p.ListPrice.ToString("0000000.00"), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
 
@@ -121,6 +121,86 @@ namespace ConsoleSearch {
         }
 
         private static void CommandUpdate(string[] cArray) {
+
+            Console.Write("Opening Index...   ");
+            Lucene.Net.Store.FSDirectory dir = Lucene.Net.Store.FSDirectory.GetDirectory(cArray[1]);
+            Lucene.Net.Index.IndexModifier idx = new Lucene.Net.Index.IndexModifier(dir, new Lucene.Net.Analysis.Standard.StandardAnalyzer(), false);
+            Console.WriteLine("Done");
+
+            Console.Write("Getting Data...   ");
+            AdventureWorksDataContext awCtx = new AdventureWorksDataContext();
+            var products = from product in awCtx.Products
+                           select new {
+                               product.Color,
+                               product.ListPrice,
+                               product.Name,
+                               product.ProductNumber,
+                               Model = product.ProductModel.Name,
+                               Description = product.ProductModel.ProductModelProductDescriptions.Single(d => d.Culture.Equals("en")).ProductDescription.Description,
+                               Category = product.ProductCategory.Name
+                           };
+            Console.WriteLine("Done");
+
+
+            int FailCount = 0;
+            foreach (var p in products) {
+
+                Console.Write(String.Format("Updating {0}...", p.ProductNumber));
+
+                Lucene.Net.Index.Term tSku = new Lucene.Net.Index.Term("sku", p.ProductNumber);
+
+                DateTime start = DateTime.Now;
+                bool deleted = false;
+
+                while (start.AddSeconds(5) >= DateTime.Now) {
+                    try {
+                        Int32 result = idx.DeleteDocuments(tSku);
+                        Console.Write(" Del Count: " + result.ToString() + " ");
+                        deleted = true;
+                        break;
+                    }
+                    catch {
+                        Thread.Sleep(10);
+                    }
+                }
+
+
+                String searchText = String.Join(" ", new String[] {p.Category, p.Color, p.Description, 
+                                                                   p.Model, p.Name, p.ProductNumber});
+
+                Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
+                doc.Add(new Lucene.Net.Documents.Field("sku", p.ProductNumber, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("_searchtxt", searchText, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("price", p.ListPrice.ToString("0000000.00"), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
+
+                start = DateTime.Now;
+                bool saved = false;
+
+                while (start.AddSeconds(5) >= DateTime.Now && deleted) {
+                    try {
+                        idx.AddDocument(doc);
+                        saved = true;
+                        break;
+                    }
+                    catch {
+                        Thread.Sleep(10);
+                    }
+                }
+
+                if (saved) Console.WriteLine("Done");
+                else {
+                    Console.WriteLine("Failed");
+                    FailCount++;
+                }
+            }
+
+            Console.Write("Optimizing/Closing Index...   ");
+            idx.Optimize();
+            idx.Close();
+            dir.Close();
+            GC.Collect();
+            Console.WriteLine("Done - Failed: " + FailCount.ToString());
+
         }
 
         private static void CommandLoad(string[] cArray) {
