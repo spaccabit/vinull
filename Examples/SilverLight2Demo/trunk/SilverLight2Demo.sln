@@ -1,0 +1,64 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "SilverLight2DemoSite", "http://localhost/SilverLight2DemoSite", "{14770745-CE33-42FA-8361-77BDA2C60C9D}"
+	ProjectSection(WebsiteProperties) = preProject
+		TargetFramework = "3.5"
+		Debug.AspNetCompiler.VirtualPath = "/SilverLight2DemoSite"
+		Debug.AspNetCompiler.PhysicalPath = "SilverLight2DemoSite\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\SilverLight2DemoSite\"
+		Debug.AspNetCompiler.Updateable = "true"
+		Debug.AspNetCompiler.ForceOverwrite = "true"
+		Debug.AspNetCompiler.FixedNames = "false"
+		Debug.AspNetCompiler.Debug = "True"
+		Release.AspNetCompiler.VirtualPath = "/SilverLight2DemoSite"
+		Release.AspNetCompiler.PhysicalPath = "SilverLight2DemoSite\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\SilverLight2DemoSite\"
+		Release.AspNetCompiler.Updateable = "true"
+		Release.AspNetCompiler.ForceOverwrite = "true"
+		Release.AspNetCompiler.FixedNames = "false"
+		Release.AspNetCompiler.Debug = "False"
+		SlnRelativePath = "SilverLight2DemoSite\"
+		ProjOutputReferences = "{9A045E11-654F-4831-93D2-00F7AA4085EA}|;"
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileUploader", "FileUploader\FileUploader.csproj", "{9A045E11-654F-4831-93D2-00F7AA4085EA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|.NET = Debug|.NET
+		Debug|Any CPU = Debug|Any CPU
+		Debug|Mixed Platforms = Debug|Mixed Platforms
+		Release|.NET = Release|.NET
+		Release|Any CPU = Release|Any CPU
+		Release|Mixed Platforms = Release|Mixed Platforms
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Debug|.NET.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Debug|.NET.Build.0 = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Debug|Any CPU.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Debug|Mixed Platforms.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Debug|Mixed Platforms.Build.0 = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Release|.NET.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Release|.NET.Build.0 = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Release|Any CPU.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Release|Mixed Platforms.ActiveCfg = Debug|.NET
+		{14770745-CE33-42FA-8361-77BDA2C60C9D}.Release|Mixed Platforms.Build.0 = Debug|.NET
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Debug|.NET.ActiveCfg = Debug|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Release|.NET.ActiveCfg = Release|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{9A045E11-654F-4831-93D2-00F7AA4085EA}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = 
+	EndGlobalSection
+EndGlobal

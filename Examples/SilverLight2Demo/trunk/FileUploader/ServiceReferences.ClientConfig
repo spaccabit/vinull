@@ -1,0 +1,16 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="FileServiceSoap" maxBufferSize="65536" maxReceivedMessageSize="65536">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost/SilverLight2DemoSite/FileUploader/FileService.asmx"
+                binding="basicHttpBinding" bindingConfiguration="FileServiceSoap"
+                contract="FileUploader.LocalService.FileServiceSoap" name="FileServiceSoap" />
+        </client>
+    </system.serviceModel>
+</configuration>

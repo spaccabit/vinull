@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://SilverLight2Demmo/FileService" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" targetNamespace="http://SilverLight2Demmo/FileService" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://SilverLight2Demmo/FileService">
+      <s:element name="GenerateClientID">
+        <s:complexType />
+      </s:element>
+      <s:element name="GenerateClientIDResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GenerateClientIDResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveFileChunk">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClientID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="Data" type="s:base64Binary" />
+            <s:element minOccurs="1" maxOccurs="1" name="Offset" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="CheckSum" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SaveFileChunkResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="SaveFileChunkResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessFile">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ClientID" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="FileName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="ProcessFileResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="ProcessFileResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="GenerateClientIDSoapIn">
+    <wsdl:part name="parameters" element="tns:GenerateClientID" />
+  </wsdl:message>
+  <wsdl:message name="GenerateClientIDSoapOut">
+    <wsdl:part name="parameters" element="tns:GenerateClientIDResponse" />
+  </wsdl:message>
+  <wsdl:message name="SaveFileChunkSoapIn">
+    <wsdl:part name="parameters" element="tns:SaveFileChunk" />
+  </wsdl:message>
+  <wsdl:message name="SaveFileChunkSoapOut">
+    <wsdl:part name="parameters" element="tns:SaveFileChunkResponse" />
+  </wsdl:message>
+  <wsdl:message name="ProcessFileSoapIn">
+    <wsdl:part name="parameters" element="tns:ProcessFile" />
+  </wsdl:message>
+  <wsdl:message name="ProcessFileSoapOut">
+    <wsdl:part name="parameters" element="tns:ProcessFileResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FileServiceSoap">
+    <wsdl:operation name="GenerateClientID">
+      <wsdl:input message="tns:GenerateClientIDSoapIn" />
+      <wsdl:output message="tns:GenerateClientIDSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SaveFileChunk">
+      <wsdl:input message="tns:SaveFileChunkSoapIn" />
+      <wsdl:output message="tns:SaveFileChunkSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ProcessFile">
+      <wsdl:input message="tns:ProcessFileSoapIn" />
+      <wsdl:output message="tns:ProcessFileSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FileServiceSoap" type="tns:FileServiceSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateClientID">
+      <soap:operation soapAction="http://SilverLight2Demmo/FileService/GenerateClientID" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveFileChunk">
+      <soap:operation soapAction="http://SilverLight2Demmo/FileService/SaveFileChunk" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessFile">
+      <soap:operation soapAction="http://SilverLight2Demmo/FileService/ProcessFile" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FileServiceSoap12" type="tns:FileServiceSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="GenerateClientID">
+      <soap12:operation soapAction="http://SilverLight2Demmo/FileService/GenerateClientID" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SaveFileChunk">
+      <soap12:operation soapAction="http://SilverLight2Demmo/FileService/SaveFileChunk" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ProcessFile">
+      <soap12:operation soapAction="http://SilverLight2Demmo/FileService/ProcessFile" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileService">
+    <wsdl:port name="FileServiceSoap" binding="tns:FileServiceSoap">
+      <soap:address location="http://localhost/SilverLight2DemoSite/FileUploader/FileService.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FileServiceSoap12" binding="tns:FileServiceSoap12">
+      <soap12:address location="http://localhost/SilverLight2DemoSite/FileUploader/FileService.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
