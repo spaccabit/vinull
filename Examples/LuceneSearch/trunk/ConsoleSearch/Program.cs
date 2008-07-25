@@ -246,7 +246,6 @@ namespace ConsoleSearch {
             AdventureWorksDataContext awCtx = new AdventureWorksDataContext();
             var products = from product in awCtx.Products
                            where matches.Contains(product.ProductNumber)
-                           orderby product.ListPrice
                            select new {
                                product.Color,
                                product.ListPrice,
