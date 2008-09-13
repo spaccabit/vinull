@@ -20,7 +20,7 @@ using System.IO;
 [ScriptService]
 public class ProductService : ApiKeyService {
 
-    [WebMethod]
+    [WebMethod(Description="Returs Hello World and the User Name")]
     public string HelloWorld(String apiKey) {
         String user = GetUsername(apiKey, HttpContext.Current);
 
