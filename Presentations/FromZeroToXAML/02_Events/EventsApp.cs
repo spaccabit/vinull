@@ -20,6 +20,7 @@ namespace _2_Events {
             SizeToContent = SizeToContent.Manual;
             Height = 300;
             Width = 400;
+            FontSize = 36;
 
             MouseDown += new MouseButtonEventHandler(EventsApp_MouseDown);
 
