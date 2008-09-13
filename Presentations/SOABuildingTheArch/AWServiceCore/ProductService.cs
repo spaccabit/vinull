@@ -5,6 +5,7 @@ using System.Text;
 using AWServiceCore.AWDataSetTableAdapters;
 using System.Data;
 using System.Data.SqlClient;
+using System.Diagnostics;
 
 namespace AWServiceCore {
     public class ProductService : ServiceBase {
@@ -13,6 +14,8 @@ namespace AWServiceCore {
             AWDataSet ds = GetDSAllProducts(ConnectionString);
             Types.ProductCollection products = ConvertToProducts(ds);
             return products;
+
+           EventLog.WriteEntry("ProductServiceAPI", "Opps", EventLogEntryType.Warning);
         }
 
         public static Types.ProductCollection GetProductsByModel(Int32 ModelID) {
