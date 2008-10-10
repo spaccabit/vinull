@@ -1,0 +1,37 @@
+<%@ Master Language="VB" CodeFile="MasterPage.master.vb" Inherits="MasterPage" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" >
+<head id="Head1" runat="server">
+    <title>Untitled Page</title>
+</head>
+<body>
+    <form id="form1" runat="server">
+    <table>
+		<tr>
+			<td width="200" valign="top">
+				<h1>&nbsp;</h1>
+				<asp:TreeView ID="TreeView1" runat="server" DataSourceID="SiteMapDataSource1" ImageSet="Simple"
+					PopulateNodesFromClient="False">
+					<ParentNodeStyle Font-Bold="False" />
+					<HoverNodeStyle Font-Underline="True" ForeColor="#5555DD" />
+					<SelectedNodeStyle Font-Underline="True" ForeColor="#5555DD" HorizontalPadding="0px"
+						VerticalPadding="0px" />
+					<NodeStyle Font-Names="Tahoma" Font-Size="10pt" ForeColor="Black" HorizontalPadding="0px"
+						NodeSpacing="0px" VerticalPadding="0px" />
+				</asp:TreeView>
+			</td>
+			<td valign="top">
+			<h1><asp:SiteMapPath ID="SiteMapPath1" runat="server" ParentLevelsDisplayed="1" PathSeparator=": " >
+				<NodeTemplate><asp:Literal ID="Label1" runat="server" Text='<%# Eval("title") %>'/></NodeTemplate>
+			</asp:SiteMapPath></h1>
+			<asp:contentplaceholder id="ContentPlaceHolder1" runat="server">
+			</asp:contentplaceholder>
+			</td>
+		</tr>
+    </table>
+		<asp:SiteMapDataSource ID="SiteMapDataSource1" runat="server" StartingNodeUrl="~/Default.aspx" />
+    </form>
+</body>
+</html>
