@@ -1,5 +1,0 @@
-C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\DI-ByHand\bin\Debug\DI-ByHand.exe
-C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\DI-ByHand\bin\Debug\DI-ByHand.pdb
-C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\DI-ByHand\obj\Debug\ResolveAssemblyReference.cache
-C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\DI-ByHand\obj\Debug\DI-ByHand.exe
-C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\DI-ByHand\obj\Debug\DI-ByHand.pdb
