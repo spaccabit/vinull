@@ -1,0 +1,11 @@
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject\Ninject.Core.dll
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Di-Ninject.exe
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Di-Ninject.pdb
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject.Core.dll
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject.Core.xml
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\obj\Debug\Di-Ninject.exe
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\obj\Debug\Di-Ninject.pdb
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject\Ninject.Conditions.dll
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject.Conditions.dll
+C:\Users\Mike\Documents\Presentations\DI-WayOfTheNinja\Di-Ninject\bin\Debug\Ninject.Conditions.xml
