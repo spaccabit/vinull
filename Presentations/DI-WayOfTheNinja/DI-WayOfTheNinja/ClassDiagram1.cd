@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Class Name="DI_WayOfTheNinja.Combat.Warrior" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAQAAIEAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Warrior.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Combat.Weapon" Collapsed="true">
+    <Position X="1.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Weapon.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Turtles.Foot" Collapsed="true">
+    <Position X="8" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turtles\Foot.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Turtles.Leo" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turtles\Leo.cs</FileName>
+      <NewMemberFileName>Turtles\Mike.cs</NewMemberFileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Combat.Sword" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Sword.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Combat.Nunchucks" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Combat\Nunchucks.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DI_WayOfTheNinja.Turtles.Mike" Collapsed="true">
+    <Position X="6.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Turtles\Mike.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
