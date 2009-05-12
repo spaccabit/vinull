@@ -67,7 +67,7 @@ namespace _04___Testing
         ///</summary>
         [TestMethod()]
         [HostType("ASP.NET")]
-        [AspNetDevelopmentServerHost("%PathToWebRoot%\\03 - Get Disconnected", "/03 - Get Disconnected")]
+        [AspNetDevelopmentServerHost("..\\03 - Get Disconnected", "/03 - Get Disconnected")]
         [UrlToTest("http://localhost/03 - Get Disconnected/03_Testing.aspx")]
         public void CalcExpectedProfitTest() {
             Decimal actual = Metrics_Accessor.CalcExpectedProfit(10M, 20M, 5M);
@@ -79,7 +79,7 @@ namespace _04___Testing
         ///</summary>
         [TestMethod()]
         [HostType("ASP.NET")]
-        [AspNetDevelopmentServerHost("%PathToWebRoot%\\03 - Get Disconnected", "/03 - Get Disconnected")]
+        [AspNetDevelopmentServerHost("..\\03 - Get Disconnected", "/03 - Get Disconnected")]
         [UrlToTest("http://localhost/03 - Get Disconnected/03_Testing.aspx")]
         [DeploymentItem("TestData.xml")]
         public void AddExpectedProfitTest() {
