@@ -37,6 +37,14 @@ namespace ConsoleSearch {
                             CommandSearch(cArray);
                             break;
 
+                        case "SEARCHDB":
+                            CommandSearchDB(cArray);
+                            break;
+                        
+                        case "SEARCHSORT":
+                            CommandSearchSort(cArray);
+                            break;
+
                         case "FREEMEM":
                             GC.Collect();
                             GC.WaitForPendingFinalizers();
@@ -83,12 +91,17 @@ namespace ConsoleSearch {
                 String searchText = String.Join(" ", new String[] {p.Category, p.Color, p.Description, 
                                                                    p.Model, p.Name, p.ProductNumber});
 
+                String desc = String.Format("{0}: {1} {2:c} - {3}", new object[] { p.Model, p.Name, p.ListPrice, p.Description });
                 Console.Write(String.Format("Adding {0}...   ", p.ProductNumber));
 
                 Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
                 doc.Add(new Lucene.Net.Documents.Field("sku", p.ProductNumber, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("_searchtxt", searchText, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("price", p.ListPrice.ToString("0000000.00"), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("_desc", desc, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NO));
+                if(!String.IsNullOrEmpty(p.Color))
+                    doc.Add(new Lucene.Net.Documents.Field("color", p.Color, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("model", p.Model, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
 
                 DateTime start = DateTime.Now;
                 bool saved = false;
@@ -168,10 +181,17 @@ namespace ConsoleSearch {
                 String searchText = String.Join(" ", new String[] {p.Category, p.Color, p.Description, 
                                                                    p.Model, p.Name, p.ProductNumber});
 
+                String desc = String.Format("{0}: {1} {2:c} - {3}", new object[] { p.Model, p.Name, p.ListPrice, p.Description });
+                
                 Lucene.Net.Documents.Document doc = new Lucene.Net.Documents.Document();
                 doc.Add(new Lucene.Net.Documents.Field("sku", p.ProductNumber, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("_searchtxt", searchText, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
                 doc.Add(new Lucene.Net.Documents.Field("price", p.ListPrice.ToString("0000000.00"), Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.UN_TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("_desc", desc, Lucene.Net.Documents.Field.Store.YES, Lucene.Net.Documents.Field.Index.NO));
+                if (!String.IsNullOrEmpty(p.Color))
+                    doc.Add(new Lucene.Net.Documents.Field("color", p.Color, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
+                doc.Add(new Lucene.Net.Documents.Field("model", p.Model, Lucene.Net.Documents.Field.Store.NO, Lucene.Net.Documents.Field.Index.TOKENIZED));
+
 
                 start = DateTime.Now;
                 bool saved = false;
@@ -228,6 +248,65 @@ namespace ConsoleSearch {
             Lucene.Net.Search.IndexSearcher idx = new Lucene.Net.Search.IndexSearcher(ramDir);
             Lucene.Net.QueryParsers.QueryParser qp = new Lucene.Net.QueryParsers.QueryParser("_searchtxt", new Lucene.Net.Analysis.Standard.StandardAnalyzer());
             qp.SetDefaultOperator(Lucene.Net.QueryParsers.QueryParser.Operator.AND);
+            Lucene.Net.Search.BooleanQuery.SetMaxClauseCount(1000);
+
+            Lucene.Net.Search.Hits hits = idx.Search(qp.Parse(srch));
+
+            for (int i = 0; i < hits.Length(); i++) {
+                Lucene.Net.Documents.Document doc = hits.Doc(i);
+                 Console.WriteLine(doc.Get("_desc"));
+                if (i >= 99) break;
+            }
+
+            idx.Close();
+            TimeSpan lTime = DateTime.Now - start;
+
+            Console.WriteLine(String.Format("Hits: {0} Search: {1}",
+                hits.Length(), lTime.TotalSeconds.ToString("0.00")));
+        }
+
+        private static void CommandSearchSort(string[] cArray) {
+            if (ramDir == null) {
+                Console.WriteLine("Index not loaded");
+                return;
+            }
+
+            DateTime start = DateTime.Now;
+
+            String srch = String.Join(" ", cArray, 1, cArray.Length - 1);
+            Lucene.Net.Search.IndexSearcher idx = new Lucene.Net.Search.IndexSearcher(ramDir);
+            Lucene.Net.QueryParsers.QueryParser qp = new Lucene.Net.QueryParsers.QueryParser("_searchtxt", new Lucene.Net.Analysis.Standard.StandardAnalyzer());
+            qp.SetDefaultOperator(Lucene.Net.QueryParsers.QueryParser.Operator.AND);
+            Lucene.Net.Search.Sort sort = new Lucene.Net.Search.Sort("price");
+            Lucene.Net.Search.BooleanQuery.SetMaxClauseCount(1000);
+
+            Lucene.Net.Search.Hits hits = idx.Search(qp.Parse(srch), sort);
+
+            for (int i = 0; i < hits.Length(); i++) {
+                Lucene.Net.Documents.Document doc = hits.Doc(i);
+                Console.WriteLine(doc.Get("_desc"));
+                if (i >= 99) break;
+            }
+
+            idx.Close();
+            TimeSpan lTime = DateTime.Now - start;
+
+            Console.WriteLine(String.Format("Hits: {0} Search: {1}",
+                hits.Length(), lTime.TotalSeconds.ToString("0.00")));
+        }
+
+        private static void CommandSearchDB(string[] cArray) {
+            if (ramDir == null) {
+                Console.WriteLine("Index not loaded");
+                return;
+            }
+
+            DateTime start = DateTime.Now;
+
+            String srch = String.Join(" ", cArray, 1, cArray.Length - 1);
+            Lucene.Net.Search.IndexSearcher idx = new Lucene.Net.Search.IndexSearcher(ramDir);
+            Lucene.Net.QueryParsers.QueryParser qp = new Lucene.Net.QueryParsers.QueryParser("_searchtxt", new Lucene.Net.Analysis.Standard.StandardAnalyzer());
+            qp.SetDefaultOperator(Lucene.Net.QueryParsers.QueryParser.Operator.AND);
             Lucene.Net.Search.Sort sort = new Lucene.Net.Search.Sort("price");
             Lucene.Net.Search.BooleanQuery.SetMaxClauseCount(1000);
 
@@ -242,7 +321,7 @@ namespace ConsoleSearch {
 
             idx.Close();
             TimeSpan lTime = DateTime.Now - start;
-            
+
             AdventureWorksDataContext awCtx = new AdventureWorksDataContext();
             var products = from product in awCtx.Products
                            where matches.Contains(product.ProductNumber)
@@ -259,12 +338,12 @@ namespace ConsoleSearch {
             TimeSpan dbTime = DateTime.Now - start + lTime;
 
             foreach (var p in products) {
-                Console.WriteLine(String.Format("{0,-10} {1,10} {2,-10} {3,-20} {4}", 
+                Console.WriteLine(String.Format("{0,-10} {1,10} {2,-10} {3,-20} {4}",
                         new String[] { p.ProductNumber, p.ListPrice.ToString("c"),
                                        p.Color, p.Category, p.Model}));
             }
 
-            Console.WriteLine(String.Format("Hits: {0} Search: {1} Lookup: {2}", 
+            Console.WriteLine(String.Format("Hits: {0} Search: {1} Lookup: {2}",
                 hits.Length(), lTime.TotalSeconds.ToString("0.00"), dbTime.TotalSeconds.ToString("0.00")));
         }
     }
