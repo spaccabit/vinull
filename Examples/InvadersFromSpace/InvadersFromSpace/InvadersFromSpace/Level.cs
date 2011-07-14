@@ -28,6 +28,19 @@ namespace InvadersFromSpace {
         public void Update(GameTime gameTime) {
             Player.Update(gameTime);
             Invaders.Update(gameTime);
+
+            if(Player.Shot.Active && 
+                (Invaders.ArmadaLocation.Intersects(Player.Shot.Location) || Invaders.ArmadaLocation.Contains(Player.Shot.Location))) {
+                    for (int i = Invaders.Invaders.Length - 1; i >= 0; i--) {
+                        if (Invaders.Invaders[i].Active &&
+                            (Invaders.Invaders[i].Location.Intersects(Player.Shot.Location) || Invaders.Invaders[i].Location.Contains(Player.Shot.Location))) {
+                                Invaders.Invaders[i].Active = false;
+                                Player.Shot.Active = false;
+                                Invaders.UpdateArmadaLocation();
+                                break;
+                        }
+                    }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {
@@ -35,6 +48,7 @@ namespace InvadersFromSpace {
             spriteBatch.Draw(SpriteSheet.Texture, Screen, SpriteSheet.Solid, Color.Blue);
             spriteBatch.Draw(SpriteSheet.Texture, Field, SpriteSheet.Solid, Color.Black);
             Player.Draw(spriteBatch);
+            spriteBatch.Draw(SpriteSheet.Texture, Invaders.ArmadaLocation, SpriteSheet.Solid, Color.Gray);
             Invaders.Draw(spriteBatch);
 
             spriteBatch.End();

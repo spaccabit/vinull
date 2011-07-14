@@ -17,7 +17,7 @@ namespace InvadersFromSpace {
         double ArmadaMoveRate = 50;
         Int32 ArmadaSpeed = 5;
         Int32 ArmadaDirection = 1;
-        Rectangle ArmadaLocation;
+        public Rectangle ArmadaLocation;
         Rectangle Field;
 
         Int32 startx;
@@ -46,6 +46,30 @@ namespace InvadersFromSpace {
             Landed = false;
         }
 
+        public void UpdateArmadaLocation() {
+            ArmadaLocation.X = 0;
+            ArmadaLocation.Y = 0;
+            ArmadaLocation.Width = 0;
+            ArmadaLocation.Height = 0;
+
+            for (int i = 0; i < Invaders.Length; i++) {
+                if (Invaders[i].Active) {
+                    if (ArmadaLocation.X == 0 || ArmadaLocation.X > Invaders[i].Location.X) {
+                        ArmadaLocation.Width += ArmadaLocation.X - Invaders[i].Location.X;
+                        ArmadaLocation.X = Invaders[i].Location.X;
+                    }
+                    if (ArmadaLocation.Y == 0)
+                        ArmadaLocation.Y = Invaders[i].Location.Y;
+                    if (ArmadaLocation.Width < Invaders[i].Location.X + Invaders[i].Location.Width - ArmadaLocation.X)
+                        ArmadaLocation.Width = Invaders[i].Location.X + Invaders[i].Location.Width - ArmadaLocation.X;
+                    if (ArmadaLocation.Height < Invaders[i].Location.Y + Invaders[i].Location.Height - ArmadaLocation.Y)
+                        ArmadaLocation.Height = Invaders[i].Location.Y + Invaders[i].Location.Height - ArmadaLocation.Y;
+                }
+            }
+
+
+        }
+
         public void Update(GameTime gameTime) {
 
             ArmadaMoveTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
@@ -56,7 +80,6 @@ namespace InvadersFromSpace {
                 if (!Field.Contains(ArmadaLocation)) {
                     ArmadaLocation.X -= ArmadaSpeed * ArmadaDirection;
                     ArmadaDirection *= -1;
-                    ArmadaLocation.X += ArmadaSpeed * ArmadaDirection;
 
                     ArmadaLocation.Y += 20;
                     if (!Field.Contains(ArmadaLocation)) {
