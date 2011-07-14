@@ -29,6 +29,7 @@ namespace InvadersFromSpace {
             Invaders = new Invader[rows * cols];
             Field = field;
             startx = x;
+            starty = y;
 
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < cols; c++) {
