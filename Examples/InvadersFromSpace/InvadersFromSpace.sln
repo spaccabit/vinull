@@ -1,0 +1,27 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvadersFromSpace", "InvadersFromSpace\InvadersFromSpace\InvadersFromSpace.csproj", "{9534596C-CA15-435D-9469-CF94C361A67A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvadersFromSpaceContent", "InvadersFromSpace\InvadersFromSpaceContent\InvadersFromSpaceContent.contentproj", "{5D801F10-E140-40C8-BC04-FEA0F9D7B527}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9534596C-CA15-435D-9469-CF94C361A67A}.Debug|x86.ActiveCfg = Debug|x86
+		{9534596C-CA15-435D-9469-CF94C361A67A}.Debug|x86.Build.0 = Debug|x86
+		{9534596C-CA15-435D-9469-CF94C361A67A}.Release|x86.ActiveCfg = Release|x86
+		{9534596C-CA15-435D-9469-CF94C361A67A}.Release|x86.Build.0 = Release|x86
+		{5D801F10-E140-40C8-BC04-FEA0F9D7B527}.Debug|x86.ActiveCfg = Debug|x86
+		{5D801F10-E140-40C8-BC04-FEA0F9D7B527}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+	EndGlobalSection
+EndGlobal
