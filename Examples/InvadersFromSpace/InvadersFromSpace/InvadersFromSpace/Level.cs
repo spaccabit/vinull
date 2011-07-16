@@ -48,7 +48,6 @@ namespace InvadersFromSpace {
             spriteBatch.Draw(SpriteSheet.Texture, Screen, SpriteSheet.Solid, Color.Blue);
             spriteBatch.Draw(SpriteSheet.Texture, Field, SpriteSheet.Solid, Color.Black);
             Player.Draw(spriteBatch);
-            spriteBatch.Draw(SpriteSheet.Texture, Invaders.ArmadaLocation, SpriteSheet.Solid, Color.Gray);
             Invaders.Draw(spriteBatch);
 
             spriteBatch.End();

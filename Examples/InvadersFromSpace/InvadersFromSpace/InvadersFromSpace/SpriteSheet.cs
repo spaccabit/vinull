@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
 namespace InvadersFromSpace {
-    public struct SpriteSheet {
+    public static class SpriteSheet {
 
         public static Texture2D Texture;
 

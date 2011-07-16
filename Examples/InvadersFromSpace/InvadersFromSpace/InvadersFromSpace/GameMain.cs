@@ -39,8 +39,6 @@ namespace InvadersFromSpace {
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SpriteSheet.Texture = Content.Load<Texture2D>("SpriteSheet");
-
-            //pc = new PlayerCannon(0, 440, 30, 610 - SpriteSheet.PlayerCannon.Width);
         }
 
         protected override void UnloadContent() {
