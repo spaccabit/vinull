@@ -38,7 +38,8 @@ namespace InvadersFromSpace {
 
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            SpriteSheet.Texture = Content.Load<Texture2D>("SpriteSheet");
+            Sprites.SpriteSheet = Content.Load<Texture2D>("SpriteSheet");
+            Sprites.Starfield = Content.Load<Texture2D>("Starfield");
         }
 
         protected override void UnloadContent() {

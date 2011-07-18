@@ -11,39 +11,42 @@ namespace InvadersFromSpace {
     public class PlayerCannon {
 
         public Rectangle Location;
-        public Int32 LeftBounds;
-        public Int32 RightBounds;
+        public Rectangle Field;
         public Bullet Shot = Bullet.CreateBullet();
+        public Boolean Hit;
 
         const Double CannonSpeed = 0.2;
         const Double BulletSpeed = 0.4;
 
-        public PlayerCannon(Int32 x, Int32 y, Int32 left, Int32 right) {
-            Location.X = x;
-            Location.Y = y;
-            Location.Width = SpriteSheet.PlayerCannon.Width;
-            Location.Height = SpriteSheet.PlayerCannon.Height;
-            LeftBounds = left;
-            RightBounds = right;
+        public PlayerCannon(Rectangle field) {
+            Field = field;
+            Hit = false;
+
+            Location.X = Field.X;
+            Location.Y = Field.Y + Field.Height - Sprites.PlayerCannon.Height;
+            Location.Width = Sprites.PlayerCannon.Width;
+            Location.Height = Sprites.PlayerCannon.Height;
         }
 
         public void Update(GameTime gameTime) {
             KeyboardState keys = Keyboard.GetState();
-            MovePlayer(gameTime, keys);
-            UpdateShot(gameTime, keys);
+            if (!Hit) {
+                MovePlayer(gameTime, keys);
+                UpdateShot(gameTime, keys);
+            }
         }
 
         private void UpdateShot(GameTime gameTime, KeyboardState keys) {
             if (Shot.Active) {
                 Shot.Location.Y -= (Int32)(gameTime.ElapsedGameTime.TotalMilliseconds * BulletSpeed);
 
-                if (Shot.Location.Y < 0)
+                if (Shot.Location.Y < Field.Y)
                     Shot.Active = false;
             }
             else if (keys.IsKeyDown(Keys.Space)) {
                 Shot.Active = true;
-                Shot.Location.Y = Location.Y - SpriteSheet.Bullet.Height;
-                Shot.Location.X = Location.X + Location.Width / 2 - SpriteSheet.Bullet.Width / 2;
+                Shot.Location.Y = Location.Y - Sprites.Bullet.Height;
+                Shot.Location.X = Location.X + Location.Width / 2 - Sprites.Bullet.Width / 2;
             }
         }
 
@@ -54,13 +57,13 @@ namespace InvadersFromSpace {
             else if (keys.IsKeyDown(Keys.Left))
                 Location.X -= (Int32)(gameTime.ElapsedGameTime.TotalMilliseconds * CannonSpeed);
 
-            if (Location.X < LeftBounds || Location.X > RightBounds)
-                Location.X = (Int32)MathHelper.Clamp(Location.X, LeftBounds, RightBounds);
+            if (!Field.Contains(Location))
+                Location.X = (Int32)MathHelper.Clamp(Location.X, Field.X, Field.X + Field.Width - Location.Width);
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(SpriteSheet.Texture, Location, SpriteSheet.PlayerCannon, Color.ForestGreen);
-            Bullet.Draw(spriteBatch, Shot, Color.Green);
+            spriteBatch.Draw(Sprites.SpriteSheet, Location, Sprites.PlayerCannon, Color.LimeGreen);
+            Bullet.Draw(spriteBatch, Shot, Color.LimeGreen);
         }
     }
 }
