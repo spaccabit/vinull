@@ -14,6 +14,11 @@ namespace InvadersFromSpace {
 
         PlayerCannon Player;
         Armada Invaders;
+        
+        Int32 Score;
+        String ScoreDisplay;
+        Vector2 ScoreLocation;
+        const String ScoreFormat = "Score: {0:0000}";
 
         public Level(Rectangle screen) {
             Screen = screen;
@@ -25,6 +30,8 @@ namespace InvadersFromSpace {
 
             Player = new PlayerCannon(Field);
             Invaders = new Armada(6, 10, Field);
+            Score = 0;
+            UpdateScore();
         }
 
         public void Update(GameTime gameTime) {
@@ -40,21 +47,32 @@ namespace InvadersFromSpace {
                             Invaders.Invaders[i].Active = false;
                             Player.Shot.Active = false;
                             Invaders.UpdateArmadaLocation();
+                            Score += 10;
+                            UpdateScore();
                             break;
                         }
                         if (Invaders.Invaders[i].Location.Intersects(Player.Location)) {
                             Invaders.Landed = true;
                             Player.Hit = true;
                             Player.Shot.Active = false;
+                            break;
                         }
                     }
                 }
             }
         }
 
+        private void UpdateScore() {
+            ScoreDisplay = String.Format(ScoreFormat, Score);
+            ScoreLocation = Sprites.ScoreFont.MeasureString(ScoreDisplay);
+            ScoreLocation.Y = 5;
+            ScoreLocation.X = Screen.Width - ScoreLocation.X - 5;
+        }
+
         public void Draw(SpriteBatch spriteBatch) {
             Player.Draw(spriteBatch);
             Invaders.Draw(spriteBatch);
+            spriteBatch.DrawString(Sprites.ScoreFont, ScoreDisplay, ScoreLocation, Color.LimeGreen);
         }
     }
 }
