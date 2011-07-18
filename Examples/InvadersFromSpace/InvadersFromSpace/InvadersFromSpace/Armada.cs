@@ -40,7 +40,7 @@ namespace InvadersFromSpace {
             ArmadaLocation.Height = rows * (InvaderSpacing + Sprites.Invader1[0].Height) - InvaderSpacing;
             ArmadaLocation.X = Field.X + Field.Width / 2 - ArmadaLocation.Width / 2;
             ArmadaLocation.Y = Field.Y;
-            
+
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < cols; c++) {
                     Invaders[c + r * cols] = Invader.CreateInvader(Sprites.Invader1,

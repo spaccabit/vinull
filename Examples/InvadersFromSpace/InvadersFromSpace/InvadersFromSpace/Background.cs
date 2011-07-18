@@ -8,23 +8,20 @@ using Microsoft.Xna.Framework.Graphics;
 namespace InvadersFromSpace {
     public class Background {
 
-        Rectangle Screen;
         Rectangle Moon;
         Rectangle StarField1;
         Rectangle StarField2;
 
         static double starspeed = 0.1;
         
-        public Background(Rectangle screen) {
-            Screen = screen;
-        
-            StarField1 = screen;
-            StarField2 = screen;
+        public Background() {
+            StarField1 = GameMain.Screen;
+            StarField2 = GameMain.Screen;
             StarField2.Y += 160;
 
-            Moon = screen;
+            Moon = GameMain.Screen;
             Moon.Height = 30;
-            Moon.Y = screen.Height - Moon.Height;
+            Moon.Y = GameMain.Screen.Height - Moon.Height;
         }
 
         public void Update(GameTime gameTime) {
@@ -35,8 +32,8 @@ namespace InvadersFromSpace {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Draw(Sprites.Starfield, Screen, StarField1, Color.DarkSlateGray);
-            spriteBatch.Draw(Sprites.Starfield, Screen, StarField2, Color.SlateGray);
+            spriteBatch.Draw(Sprites.Starfield, GameMain.Screen, StarField1, Color.DarkSlateGray);
+            spriteBatch.Draw(Sprites.Starfield, GameMain.Screen, StarField2, Color.SlateGray);
             spriteBatch.Draw(Sprites.SpriteSheet, Moon, Sprites.Moon, Color.Gray);
         }
     }
