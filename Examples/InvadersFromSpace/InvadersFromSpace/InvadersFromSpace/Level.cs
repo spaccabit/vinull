@@ -11,30 +11,17 @@ namespace InvadersFromSpace {
 
         Rectangle Screen;
         Rectangle Field;
-        Rectangle Moon;
 
-        Rectangle StarField1;
-        Rectangle StarField2;
         PlayerCannon Player;
         Armada Invaders;
-
-        static double starspeed = 0.1;
 
         public Level(Rectangle screen) {
             Screen = screen;
 
-            StarField1 = screen;
-            StarField2 = screen;
-            StarField2.Y += 160;
-            
             Field.X = 50;
             Field.Width = screen.Width - 100;
             Field.Y = 50;
             Field.Height = screen.Height - 70;
-
-            Moon = screen;
-            Moon.Height = 30;
-            Moon.Y = screen.Height - Moon.Height;
 
             Player = new PlayerCannon(Field);
             Invaders = new Armada(6, 10, Field);
@@ -43,11 +30,6 @@ namespace InvadersFromSpace {
         public void Update(GameTime gameTime) {
             Player.Update(gameTime);
             Invaders.Update(gameTime);
-
-            StarField1.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 2);
-            StarField1.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 4);
-            StarField2.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed);
-            StarField2.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 2);
 
             if (Player.Shot.Active &&
                 (Invaders.ArmadaLocation.Intersects(Player.Shot.Location) || Invaders.ArmadaLocation.Contains(Player.Shot.Location))) {
@@ -70,14 +52,8 @@ namespace InvadersFromSpace {
         }
 
         public void Draw(SpriteBatch spriteBatch) {
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
-            spriteBatch.Draw(Sprites.Starfield, Screen, StarField1, Color.DarkSlateGray);
-            spriteBatch.Draw(Sprites.Starfield, Screen, StarField2, Color.SlateGray);
-            spriteBatch.Draw(Sprites.SpriteSheet, Moon, Sprites.Moon, Color.Gray);
             Player.Draw(spriteBatch);
             Invaders.Draw(spriteBatch);
-
-            spriteBatch.End();
         }
     }
 }

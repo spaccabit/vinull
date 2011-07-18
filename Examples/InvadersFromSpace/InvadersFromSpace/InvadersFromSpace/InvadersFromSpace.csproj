@@ -108,6 +108,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Armada.cs" />
+    <Compile Include="Background.cs" />
     <Compile Include="GameObjects.cs" />
     <Compile Include="Level.cs" />
     <Compile Include="PlayerCannon.cs" />

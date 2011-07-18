@@ -17,6 +17,7 @@ namespace InvadersFromSpace {
         Rectangle screen;
 
         Level lvl;
+        Background bg;
 
         public GameMain() {
             graphics = new GraphicsDeviceManager(this);
@@ -34,6 +35,7 @@ namespace InvadersFromSpace {
             screen.Height = graphics.PreferredBackBufferHeight;
 
             lvl = new Level(screen);
+            bg = new Background(screen);
         }
 
         protected override void LoadContent() {
@@ -49,13 +51,19 @@ namespace InvadersFromSpace {
             if (Keyboard.GetState().IsKeyDown(Keys.Escape))
                 this.Exit();
 
+            bg.Update(gameTime);
             lvl.Update(gameTime);
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
+            
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
+            bg.Draw(spriteBatch);
             lvl.Draw(spriteBatch);
+            spriteBatch.End();
+
             base.Draw(gameTime);
         }
     }
