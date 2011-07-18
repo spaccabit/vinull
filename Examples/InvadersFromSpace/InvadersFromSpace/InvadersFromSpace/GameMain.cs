@@ -14,7 +14,8 @@ namespace InvadersFromSpace {
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Rectangle screen;
+        
+        public static Rectangle Screen;
 
         Level lvl;
         Background bg;
@@ -31,11 +32,11 @@ namespace InvadersFromSpace {
             graphics.PreferredBackBufferHeight = 480;
             graphics.ApplyChanges();
 
-            screen.Width = graphics.PreferredBackBufferWidth;
-            screen.Height = graphics.PreferredBackBufferHeight;
+            Screen.Width = graphics.PreferredBackBufferWidth;
+            Screen.Height = graphics.PreferredBackBufferHeight;
 
-            lvl = new Level(screen);
-            bg = new Background(screen);
+            lvl = new Level();
+            bg = new Background();
         }
 
         protected override void LoadContent() {
