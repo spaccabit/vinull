@@ -25,12 +25,11 @@ namespace InvadersFromSpace {
             Moon = screen;
             Moon.Height = 30;
             Moon.Y = screen.Height - Moon.Height;
-
         }
 
         public void Update(GameTime gameTime) {
             StarField1.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 2);
-            StarField1.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 4);
+            StarField1.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 3);
             StarField2.X += Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed);
             StarField2.Y -= Convert.ToInt32(gameTime.ElapsedGameTime.TotalMilliseconds * starspeed / 2);
         }
