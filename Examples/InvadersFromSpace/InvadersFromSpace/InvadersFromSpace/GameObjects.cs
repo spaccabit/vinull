@@ -85,14 +85,15 @@ namespace InvadersFromSpace.Objects {
 
         public Lives(Int32 count) {
             Count = count;
-            
+
             Vector2 startMarkers = Sprites.ScoreFont.MeasureString(Label);
+
             markers = new Rectangle[Count];
             for (int i = 0; i < Count; i++) {
-                markers[i].X = (Int32)(startMarkers.X + LabelLocation.X)+ i * 5 + i * Sprites.PlayerCannon.Width;
-                markers[i].Y = (Int32)LabelLocation.Y;
-                markers[i].Height = Sprites.PlayerCannon.Height;
-                markers[i].Width = Sprites.PlayerCannon.Width;
+                markers[i].Height = (Int32)(Sprites.PlayerCannon.Height * .75);
+                markers[i].Width = (Int32)(Sprites.PlayerCannon.Width * .75);
+                markers[i].X = (Int32)(startMarkers.X + LabelLocation.X) + i * 8 + i * markers[i].Width;
+                markers[i].Y = (Int32)(LabelLocation.Y + startMarkers.Y * .85 - markers[i].Height);
             }
         }
 
