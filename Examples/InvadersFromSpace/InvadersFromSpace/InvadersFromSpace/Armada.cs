@@ -124,6 +124,7 @@ namespace InvadersFromSpace {
             }
 
             if (!Landed && MissleTimer < 0) {
+                MissleTimer = MissleRate;
                 for (int i = 0; i < Missles.Length; i++) {
                     if (!Missles[i].Active) {
                         do {
@@ -136,17 +137,26 @@ namespace InvadersFromSpace {
                             }
                         }
                         while (!Missles[i].Active);
+                        break;
                     }
+                }
+            }
+
+            for (int i = 0; i < Missles.Length; i++) {
+                if (Missles[i].Active) {
+                    Missles[i].Location.Y += (Int32)(gameTime.ElapsedGameTime.TotalMilliseconds * MissleSpeed);
+                    
+                    if (Missles[i].Location.Y > Field.Y + Field.Height)
+                        Missles[i].Active = false;
                 }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch) {
+            for (int i = 0; i < Missles.Length; i++)
+                Missles[i].Draw(spriteBatch);
             for (int i = 0; i < Invaders.Length; i++)
                 Invader.Draw(spriteBatch, Invaders[i], ArmadaFrame);
-            for (int i = 0; i < Missles.Length; i++) {
-                Missles[i].Draw(spriteBatch);
-            }
         }
 
     }
