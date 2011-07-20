@@ -54,6 +54,13 @@ namespace InvadersFromSpace {
                     }
                 }
             }
+
+            for (int i = 0; i < armada.Missles.Length; i++) {
+                if (armada.Missles[i].Active && armada.Missles[i].Location.Intersects(player.Location)) {
+                    lives.Count--;
+                    armada.Missles[i].Active = false;
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {
