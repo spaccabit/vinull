@@ -12,6 +12,7 @@ namespace InvadersFromSpace {
         public Rectangle ArmadaLocation;
         public Invader[] Invaders;
         public Boolean Landed;
+        public Bullet[] Missles;
 
         readonly Color[] InvaderColors = new Color[] { Color.Purple, Color.Blue, Color.Red, Color.Orange, Color.Yellow, Color.Silver };
         const Int32 InvaderSpacing = 10;
@@ -26,8 +27,13 @@ namespace InvadersFromSpace {
         Int32 ArmadaDirection = 1;
         Rectangle Field;
 
+        double MissleTimer;
+        const Double MissleSpeed = 0.3;
+        const Double MissleRate = 750;
+
         public Armada(Int32 rows, Int32 cols, Rectangle field) {
 
+            Missles = new Bullet[3];
             Invaders = new Invader[rows * cols];
             Field = field;
 
@@ -43,11 +49,15 @@ namespace InvadersFromSpace {
 
             for (int r = 0; r < rows; r++) {
                 for (int c = 0; c < cols; c++) {
-                    Invaders[c + r * cols] = Invader.CreateInvader(Sprites.Invader1,
+                    Invaders[c + r * cols].Init(Sprites.Invader1,
                         ArmadaLocation.X + c * (Sprites.Invader1[0].Width + InvaderSpacing),
                         ArmadaLocation.Y + r * (Sprites.Invader1[0].Height + InvaderSpacing),
                         InvaderColors[r]);
                 }
+            }
+
+            for (int i = 0; i < Missles.Length; i++) {
+                Missles[i].Init();
             }
         }
 
@@ -83,6 +93,8 @@ namespace InvadersFromSpace {
         public void Update(GameTime gameTime) {
 
             ArmadaMoveTimer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            MissleTimer -= gameTime.ElapsedGameTime.TotalMilliseconds;
+
             if (!Landed && ArmadaMoveTimer >= ArmadaMoveRate) {
                 ArmadaMoveTimer = 0;
                 ArmadaFrame = ArmadaFrame == 0 ? 1 : 0;
@@ -110,11 +122,31 @@ namespace InvadersFromSpace {
                     }
                 }
             }
+
+            if (!Landed && MissleTimer < 0) {
+                for (int i = 0; i < Missles.Length; i++) {
+                    if (!Missles[i].Active) {
+                        do {
+                            Int32 s = GameMain.Rand.Next(Invaders.Length);
+                            if (Invaders[s].Active) {
+                                Missles[i].Active = true;
+                                Missles[i].Color = Invaders[s].Color;
+                                Missles[i].Location.Y = Invaders[s].Location.Y + Invaders[s].Location.Height;
+                                Missles[i].Location.X = Invaders[s].Location.X + Invaders[s].Location.Width / 2;
+                            }
+                        }
+                        while (!Missles[i].Active);
+                    }
+                }
+            }
         }
 
         public void Draw(SpriteBatch spriteBatch) {
             for (int i = 0; i < Invaders.Length; i++)
                 Invader.Draw(spriteBatch, Invaders[i], ArmadaFrame);
+            for (int i = 0; i < Missles.Length; i++) {
+                Missles[i].Draw(spriteBatch);
+            }
         }
 
     }
