@@ -16,6 +16,7 @@ namespace InvadersFromSpace {
         SpriteBatch spriteBatch;
         
         public static Rectangle Screen;
+        public static Random Rand;
 
         Level lvl;
         Background bg;
@@ -23,6 +24,7 @@ namespace InvadersFromSpace {
         public GameMain() {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            Rand = new Random();
         }
 
         protected override void Initialize() {

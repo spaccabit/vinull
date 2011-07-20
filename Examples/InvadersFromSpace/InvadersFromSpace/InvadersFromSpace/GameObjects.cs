@@ -10,20 +10,20 @@ namespace InvadersFromSpace.Objects {
     public struct Bullet {
         public Boolean Active;
         public Rectangle Location;
+        public Color Color;
 
-        public static Bullet CreateBullet() {
-            Bullet result = new Bullet();
-            result.Active = false;
-            result.Location.X = 0;
-            result.Location.Y = 0;
-            result.Location.Width = Sprites.Bullet.Width;
-            result.Location.Height = Sprites.Bullet.Height;
-            return result;
+        public void Init() {
+            Active = false;
+            Location.X = 0;
+            Location.Y = 0;
+            Location.Width = Sprites.Bullet.Width;
+            Location.Height = Sprites.Bullet.Height;
+            Color = Color.LimeGreen;
         }
 
-        public static void Draw(SpriteBatch spriteBatch, Bullet bullet, Color color) {
-            if (bullet.Active)
-                spriteBatch.Draw(Sprites.SpriteSheet, bullet.Location, Sprites.Bullet, color);
+        public void Draw(SpriteBatch spriteBatch) {
+            if (Active)
+                spriteBatch.Draw(Sprites.SpriteSheet, Location, Sprites.Bullet, Color);
         }
     }
 
@@ -33,17 +33,14 @@ namespace InvadersFromSpace.Objects {
         public Rectangle[] Frames;
         public Color Color;
 
-        public static Invader CreateInvader(Rectangle[] frames, Int32 x, Int32 y, Color color) {
-            Invader result = new Invader();
-            result.Frames = frames;
-            result.Active = true;
-            result.Color = color;
-            result.Location.X = x;
-            result.Location.Y = y;
-            result.Location.Height = frames[0].Height;
-            result.Location.Width = frames[0].Width;
-
-            return result;
+        public void Init(Rectangle[] frames, Int32 x, Int32 y, Color color) {
+            Frames = frames;
+            Active = true;
+            Color = color;
+            Location.X = x;
+            Location.Y = y;
+            Location.Height = frames[0].Height;
+            Location.Width = frames[0].Width;
         }
 
         public static void Draw(SpriteBatch spriteBatch, Invader invader, Int32 frame) {
@@ -55,7 +52,7 @@ namespace InvadersFromSpace.Objects {
     public class Score {
         public Int32 Points;
         public String Display;
-        
+
         Vector2 Location;
         const String DisplayFormat = "Score: {0:0000}";
 
@@ -85,7 +82,6 @@ namespace InvadersFromSpace.Objects {
 
         public Lives(Int32 count) {
             Count = count;
-
             Vector2 startMarkers = Sprites.ScoreFont.MeasureString(Label);
 
             markers = new Rectangle[Count];

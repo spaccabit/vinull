@@ -12,7 +12,7 @@ namespace InvadersFromSpace {
 
         public Rectangle Location;
         public Rectangle Field;
-        public Bullet Shot = Bullet.CreateBullet();
+        public Bullet Shot;
         public Boolean Hit;
 
         const Double CannonSpeed = 0.2;
@@ -26,6 +26,8 @@ namespace InvadersFromSpace {
             Location.Y = Field.Y + Field.Height - Sprites.PlayerCannon.Height;
             Location.Width = Sprites.PlayerCannon.Width;
             Location.Height = Sprites.PlayerCannon.Height;
+
+            Shot.Init();
         }
 
         public void Update(GameTime gameTime) {
@@ -63,7 +65,7 @@ namespace InvadersFromSpace {
 
         public void Draw(SpriteBatch spriteBatch) {
             spriteBatch.Draw(Sprites.SpriteSheet, Location, Sprites.PlayerCannon, Color.LimeGreen);
-            Bullet.Draw(spriteBatch, Shot, Color.LimeGreen);
+            Shot.Draw(spriteBatch);
         }
     }
 }
