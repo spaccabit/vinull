@@ -14,7 +14,7 @@ namespace InvadersFromSpace {
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        
+
         public static Rectangle Screen;
         public static Random Rand;
 
@@ -39,6 +39,7 @@ namespace InvadersFromSpace {
 
             lvl = new Level();
             bg = new Background();
+            GameMessage.SetMessage("Press Enter\n    To Begin");
         }
 
         protected override void LoadContent() {
@@ -46,9 +47,7 @@ namespace InvadersFromSpace {
             Sprites.SpriteSheet = Content.Load<Texture2D>("SpriteSheet");
             Sprites.Starfield = Content.Load<Texture2D>("Starfield");
             Sprites.ScoreFont = Content.Load<SpriteFont>("ScoreFont");
-        }
-
-        protected override void UnloadContent() {
+            Sprites.MessageFont = Content.Load<SpriteFont>("MessageFont");
         }
 
         protected override void Update(GameTime gameTime) {
@@ -61,13 +60,13 @@ namespace InvadersFromSpace {
                 GameMessage.Update();
             else
                 lvl.Update(gameTime);
-            
+
             base.Update(gameTime);
         }
 
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
-            
+
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
             bg.Draw(spriteBatch);
             lvl.Draw(spriteBatch);

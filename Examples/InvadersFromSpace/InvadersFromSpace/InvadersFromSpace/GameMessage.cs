@@ -13,11 +13,15 @@ namespace InvadersFromSpace {
 
         private static String message;
         private static Boolean pressed;
-        private static Color background = new Color(0f, 0f, 0f, .75f);
+        private static Color background = new Color(0f, 0f, 0f, .60f);
+        private static Vector2 location;
 
         public static void SetMessage(String msg) {
+            Active = true;
             message = msg;
-
+            location = Sprites.MessageFont.MeasureString(msg);
+            location.X = GameMain.Screen.Width / 2 - location.X / 2;
+            location.Y = GameMain.Screen.Height / 2 - location.Y / 2;
         }
 
         public static void Update() {
@@ -35,6 +39,7 @@ namespace InvadersFromSpace {
         public static void Draw(SpriteBatch spriteBatch) {
             if (Active) {
                 spriteBatch.Draw(Sprites.SpriteSheet, GameMain.Screen, Sprites.Solid, background);
+                spriteBatch.DrawString(Sprites.MessageFont, message, location, Color.White);
             }
         }
     }

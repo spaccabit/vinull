@@ -15,7 +15,8 @@ namespace InvadersFromSpace {
         Armada armada;
         Score score;
         Lives lives;
-        
+        Boolean gameover;
+
         public Level() {
 
             field.X = 50;
@@ -27,6 +28,7 @@ namespace InvadersFromSpace {
             armada = new Armada(6, 10, field);
             score = new Score();
             lives = new Lives(3);
+            gameover = false;
         }
 
         public void Update(GameTime gameTime) {
@@ -58,8 +60,17 @@ namespace InvadersFromSpace {
             for (int i = 0; i < armada.Missles.Length; i++) {
                 if (armada.Missles[i].Active && armada.Missles[i].Location.Intersects(player.Location)) {
                     lives.Count--;
-                    armada.Missles[i].Active = false;
-                    GameMessage.Active = true;
+                    if (lives.Count > 0) {
+                        GameMessage.SetMessage(String.Format("Lives Left: {0}", lives.Count));
+                        gameover = true;
+                    }
+                    else
+                        GameMessage.SetMessage("Game Over");
+
+                    player.Shot.Active = false;
+                    for (int j = 0; j < armada.Missles.Length; j++)
+                        armada.Missles[j].Active = false;
+                    break;
                 }
             }
 
