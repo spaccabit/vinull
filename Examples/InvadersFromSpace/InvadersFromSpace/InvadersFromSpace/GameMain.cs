@@ -56,7 +56,12 @@ namespace InvadersFromSpace {
                 this.Exit();
 
             bg.Update(gameTime);
-            lvl.Update(gameTime);
+
+            if (GameMessage.Active)
+                GameMessage.Update();
+            else
+                lvl.Update(gameTime);
+            
             base.Update(gameTime);
         }
 
@@ -66,6 +71,8 @@ namespace InvadersFromSpace {
             spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
             bg.Draw(spriteBatch);
             lvl.Draw(spriteBatch);
+            if (GameMessage.Active)
+                GameMessage.Draw(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);
