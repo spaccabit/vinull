@@ -59,7 +59,13 @@ namespace InvadersFromSpace {
                 if (armada.Missles[i].Active && armada.Missles[i].Location.Intersects(player.Location)) {
                     lives.Count--;
                     armada.Missles[i].Active = false;
+                    GameMessage.Active = true;
                 }
+            }
+
+            if (lives.Count == 0) {
+                player.Hit = true;
+                armada.Landed = true;
             }
         }
 
