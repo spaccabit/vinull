@@ -11,6 +11,7 @@ namespace InvadersFromSpace {
         public static Texture2D SpriteSheet;
         public static Texture2D Starfield;
         public static SpriteFont ScoreFont;
+        public static SpriteFont MessageFont;
 
         public static Rectangle PlayerCannon = new Rectangle(5, 0, 22, 32);
         public static Rectangle Bullet = new Rectangle(51, 0, 5, 16);
