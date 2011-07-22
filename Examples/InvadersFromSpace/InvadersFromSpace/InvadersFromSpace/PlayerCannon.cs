@@ -67,5 +67,16 @@ namespace InvadersFromSpace {
             spriteBatch.Draw(Sprites.SpriteSheet, Location, Sprites.PlayerCannon, Color.LimeGreen);
             Shot.Draw(spriteBatch);
         }
+
+        internal void Reset() {
+            Hit = false;
+
+            Location.X = Field.X;
+            Location.Y = Field.Y + Field.Height - Sprites.PlayerCannon.Height;
+            Location.Width = Sprites.PlayerCannon.Width;
+            Location.Height = Sprites.PlayerCannon.Height;
+
+            Shot.Init();
+        }
     }
 }

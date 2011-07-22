@@ -71,6 +71,14 @@ namespace InvadersFromSpace.Objects {
         public void Draw(SpriteBatch spriteBatch) {
             spriteBatch.DrawString(Sprites.ScoreFont, Display, Location, Color.LimeGreen);
         }
+
+        public void Reset() {
+            Points = 0;
+            Display = String.Format(Score.DisplayFormat, Points);
+            Location = Sprites.ScoreFont.MeasureString(Display);
+            Location.Y = 5;
+            Location.X = GameMain.Screen.Width - Location.X - 5;
+        }
     }
 
     public class Lives {
@@ -98,6 +106,18 @@ namespace InvadersFromSpace.Objects {
             for (int i = 0; i < Count; i++)
                 spriteBatch.Draw(Sprites.SpriteSheet, markers[i], Sprites.PlayerCannon, Color.LimeGreen);
         }
-    }
 
+        public void Reset(int count) {
+            Count = count;
+            Vector2 startMarkers = Sprites.ScoreFont.MeasureString(Label);
+
+            markers = new Rectangle[Count];
+            for (int i = 0; i < Count; i++) {
+                markers[i].Height = (Int32)(Sprites.PlayerCannon.Height * .75);
+                markers[i].Width = (Int32)(Sprites.PlayerCannon.Width * .75);
+                markers[i].X = (Int32)(startMarkers.X + LabelLocation.X) + i * 8 + i * markers[i].Width;
+                markers[i].Y = (Int32)(LabelLocation.Y + startMarkers.Y * .85 - markers[i].Height);
+            }
+        }
+    }
 }

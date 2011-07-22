@@ -159,5 +159,29 @@ namespace InvadersFromSpace {
                 Invader.Draw(spriteBatch, Invaders[i], ArmadaFrame);
         }
 
+
+        public void Reset() {
+            Landed = false;
+            ArmadaDirection = 1;
+            ArmadaFrame = 0;
+            for (int i = 0; i < Missles.Length; i++)
+                Missles[i].Active = false;
+            
+            for (int i = 0; i < Invaders.Length; i++)
+                Invaders[i].Active = true;
+            
+            UpdateArmadaLocation();
+
+            Int32 xDelta = ArmadaLocation.X - (Field.X + Field.Width / 2 - ArmadaLocation.Width / 2);
+            Int32 yDelta = ArmadaLocation.Y - Field.Y;
+            ArmadaLocation.X -= xDelta;
+            ArmadaLocation.Y -= yDelta;
+
+            for (int i = 0; i < Invaders.Length; i++) {
+                Invaders[i].Location.X -= xDelta;
+                Invaders[i].Location.Y -= yDelta;
+            }
+           
+        }
     }
 }
