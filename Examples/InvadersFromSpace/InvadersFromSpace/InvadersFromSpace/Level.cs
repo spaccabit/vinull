@@ -32,9 +32,27 @@ namespace InvadersFromSpace {
         }
 
         public void Update(GameTime gameTime) {
-            player.Update(gameTime);
-            armada.Update(gameTime);
 
+            if (gameover) {
+                GameMessage.SetMessage("Press Enter\n    To Begin");
+                Reset();
+            }
+            else {
+                player.Update(gameTime);
+                armada.Update(gameTime);
+                CollisionDetection();
+            }
+        }
+
+        private void Reset() {
+            gameover = false;
+            score.Reset();
+            lives.Reset(3);
+            player.Reset();
+            armada.Reset();
+        }
+
+        private void CollisionDetection() {
             if (armada.ArmadaLocation.Intersects(player.Location) ||
                 (player.Shot.Active &&
                 (armada.ArmadaLocation.Intersects(player.Shot.Location) || armada.ArmadaLocation.Contains(player.Shot.Location)))) {
@@ -60,23 +78,21 @@ namespace InvadersFromSpace {
             for (int i = 0; i < armada.Missles.Length; i++) {
                 if (armada.Missles[i].Active && armada.Missles[i].Location.Intersects(player.Location)) {
                     lives.Count--;
-                    if (lives.Count > 0) {
+                    if (lives.Count >= 0) {
                         GameMessage.SetMessage(String.Format("Lives Left: {0}", lives.Count));
+                    }
+                    else {
+                        player.Hit = true;
+                        armada.Landed = true;
+                        GameMessage.SetMessage("Game Over");
                         gameover = true;
                     }
-                    else
-                        GameMessage.SetMessage("Game Over");
 
                     player.Shot.Active = false;
                     for (int j = 0; j < armada.Missles.Length; j++)
                         armada.Missles[j].Active = false;
                     break;
                 }
-            }
-
-            if (lives.Count == 0) {
-                player.Hit = true;
-                armada.Landed = true;
             }
         }
 
