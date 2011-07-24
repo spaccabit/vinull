@@ -27,7 +27,7 @@ namespace InvadersFromSpace {
             player = new PlayerCannon(field);
             armada = new Armada(6, 10, field);
             score = new Score();
-            lives = new Lives(3);
+            lives = new Lives(5);
             gameover = false;
         }
 
@@ -68,7 +68,8 @@ namespace InvadersFromSpace {
                         if (armada.Invaders[i].Location.Intersects(player.Location)) {
                             armada.Landed = true;
                             player.Hit = true;
-                            player.Shot.Active = false;
+                            GameMessage.SetMessage("Game Over");
+                            gameover = true;
                             break;
                         }
                     }

@@ -88,6 +88,10 @@ namespace InvadersFromSpace {
             double adj = 1 - MathHelper.Clamp((float)Math.Cos(MathHelper.PiOver2 * killed / (Invaders.Length - 1) + 0.20), 0, 1);
             ArmadaMoveRate = ArmadaStartingMoveRate - adj * (ArmadaStartingMoveRate - ArmadaEndingMoveRate);
 
+            if (killed == Invaders.Length) {
+                GameMessage.SetMessage("Next Wave");
+                Reset();
+            }
         }
 
         public void Update(GameTime gameTime) {
