@@ -168,7 +168,7 @@ namespace InvadersFromSpace {
                 Missles[i].Draw(spriteBatch);
             for (int c = 0; c < Invaders.Length; c++)
                 for (int r = 0; r < Invaders[c].Length; r++)
-                    Invader.Draw(spriteBatch, Invaders[c][r], ArmadaFrame);
+                    Invaders[c][r].Draw(spriteBatch, ArmadaFrame);
         }
 
         public void Reset() {

@@ -13,6 +13,7 @@ namespace InvadersFromSpace {
 
         PlayerCannon player;
         Armada armada;
+        Shield[] shields;
         Score score;
         Lives lives;
         Boolean gameover;
@@ -29,6 +30,13 @@ namespace InvadersFromSpace {
             score = new Score();
             lives = new Lives(3);
             gameover = false;
+
+            shields = new Shield[3];
+            for (int i = 0; i < shields.Length; i++) {
+                shields[i].Reset();
+                shields[i].Location.Y = field.Height + field.Y - 90;
+                shields[i].Location.X = field.Width + field.X - field.Width / shields.Length * i - field.Width / shields.Length / 2 - shields[i].Location.Width / 2;
+            }
         }
 
         public void Update(GameTime gameTime) {
@@ -57,6 +65,8 @@ namespace InvadersFromSpace {
             lives.Reset(3);
             player.Reset();
             armada.Reset();
+            for (int i = 0; i < shields.Length; i++) 
+                shields[i].Reset();
         }
 
         private void CollisionDetection() {
@@ -106,6 +116,8 @@ namespace InvadersFromSpace {
             armada.Draw(spriteBatch);
             score.Draw(spriteBatch);
             lives.Draw(spriteBatch);
+            for (int i = 0; i < shields.Length; i++)
+                shields[i].Draw(spriteBatch);
         }
     }
 }
