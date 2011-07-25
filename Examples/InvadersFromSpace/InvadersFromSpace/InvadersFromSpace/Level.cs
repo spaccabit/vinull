@@ -27,14 +27,14 @@ namespace InvadersFromSpace {
             player = new PlayerCannon(field);
             armada = new Armada(6, 10, field);
             score = new Score();
-            lives = new Lives(5);
+            lives = new Lives(3);
             gameover = false;
         }
 
         public void Update(GameTime gameTime) {
 
             if (gameover) {
-                GameMessage.SetMessage("Press Enter\n    To Begin");
+                GameMessage.SetMessage(GameMessage.StartMessage);
                 Reset();
             }
             else {
@@ -44,6 +44,13 @@ namespace InvadersFromSpace {
             }
         }
 
+        private void GameOver() {
+            player.Hit = true;
+            armada.Landed = true;
+            GameMessage.SetMessage(GameMessage.GameOverMessage);
+            gameover = true;
+        }
+        
         private void Reset() {
             gameover = false;
             score.Reset();
@@ -53,9 +60,11 @@ namespace InvadersFromSpace {
         }
 
         private void CollisionDetection() {
-            if (armada.ArmadaLocation.Intersects(player.Location) ||
-                (player.Shot.Active &&
-                (armada.ArmadaLocation.Intersects(player.Shot.Location) || armada.ArmadaLocation.Contains(player.Shot.Location)))) {
+            if (armada.Landed && !player.Hit)
+                GameOver();
+            else if (armada.ArmadaLocation.Intersects(player.Location) ||
+                    (player.Shot.Active &&
+                    (armada.ArmadaLocation.Intersects(player.Shot.Location) || armada.ArmadaLocation.Contains(player.Shot.Location)))) {
                 for (int i = armada.Invaders.Length - 1; i >= 0; i--) {
                     if (armada.Invaders[i].Active) {
                         if (armada.Invaders[i].Location.Intersects(player.Shot.Location) || armada.Invaders[i].Location.Contains(player.Shot.Location)) {
@@ -66,10 +75,7 @@ namespace InvadersFromSpace {
                             break;
                         }
                         if (armada.Invaders[i].Location.Intersects(player.Location)) {
-                            armada.Landed = true;
-                            player.Hit = true;
-                            GameMessage.SetMessage("Game Over");
-                            gameover = true;
+                            GameOver();
                             break;
                         }
                     }
@@ -83,10 +89,7 @@ namespace InvadersFromSpace {
                         GameMessage.SetMessage(String.Format("Lives Left: {0}", lives.Count));
                     }
                     else {
-                        player.Hit = true;
-                        armada.Landed = true;
-                        GameMessage.SetMessage("Game Over");
-                        gameover = true;
+                        GameOver();
                     }
 
                     player.Shot.Active = false;
