@@ -39,7 +39,7 @@ namespace InvadersFromSpace {
 
             lvl = new Level();
             bg = new Background();
-            GameMessage.SetMessage("Press Enter\n    To Begin");
+            GameMessage.SetMessage(GameMessage.StartMessage);
         }
 
         protected override void LoadContent() {
