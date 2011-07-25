@@ -50,7 +50,7 @@ namespace InvadersFromSpace {
             GameMessage.SetMessage(GameMessage.GameOverMessage);
             gameover = true;
         }
-        
+
         private void Reset() {
             gameover = false;
             score.Reset();
@@ -65,21 +65,22 @@ namespace InvadersFromSpace {
             else if (armada.ArmadaLocation.Intersects(player.Location) ||
                     (player.Shot.Active &&
                     (armada.ArmadaLocation.Intersects(player.Shot.Location) || armada.ArmadaLocation.Contains(player.Shot.Location)))) {
-                for (int i = armada.Invaders.Length - 1; i >= 0; i--) {
-                    if (armada.Invaders[i].Active) {
-                        if (armada.Invaders[i].Location.Intersects(player.Shot.Location) || armada.Invaders[i].Location.Contains(player.Shot.Location)) {
-                            armada.Invaders[i].Active = false;
-                            player.Shot.Active = false;
-                            armada.UpdateArmadaLocation();
-                            score.AddPoints(10);
-                            break;
-                        }
-                        if (armada.Invaders[i].Location.Intersects(player.Location)) {
-                            GameOver();
-                            break;
+                for (int c = 0; c < armada.Invaders.Length; c++)
+                    for (int r = 0; r < armada.Invaders[c].Length; r++) {
+                        if (armada.Invaders[c][r].Active) {
+                            if (armada.Invaders[c][r].Location.Intersects(player.Shot.Location) || armada.Invaders[c][r].Location.Contains(player.Shot.Location)) {
+                                armada.Invaders[c][r].Active = false;
+                                player.Shot.Active = false;
+                                armada.UpdateArmadaLocation();
+                                score.AddPoints(10);
+                                break;
+                            }
+                            if (armada.Invaders[c][r].Location.Intersects(player.Location)) {
+                                GameOver();
+                                break;
+                            }
                         }
                     }
-                }
             }
 
             for (int i = 0; i < armada.Missles.Length; i++) {
