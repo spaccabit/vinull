@@ -43,9 +43,9 @@ namespace InvadersFromSpace.Objects {
             Location.Width = frames[0].Width;
         }
 
-        public static void Draw(SpriteBatch spriteBatch, Invader invader, Int32 frame) {
-            if (invader.Active)
-                spriteBatch.Draw(Sprites.SpriteSheet, invader.Location, invader.Frames[frame], invader.Color);
+        public void Draw(SpriteBatch spriteBatch, Int32 frame) {
+            if (Active)
+                spriteBatch.Draw(Sprites.SpriteSheet, Location, Frames[frame], Color);
         }
     }
 
@@ -118,6 +118,44 @@ namespace InvadersFromSpace.Objects {
                 markers[i].X = (Int32)(startMarkers.X + LabelLocation.X) + i * 8 + i * markers[i].Width;
                 markers[i].Y = (Int32)(LabelLocation.Y + startMarkers.Y * .85 - markers[i].Height);
             }
+        }
+    }
+
+    public struct Shield {
+
+        public Boolean[][] Blocks;
+        public Rectangle Location;
+        Rectangle blockLocation;
+
+        public void Reset() {
+            blockLocation = new Rectangle(0, 0, 8, 9);
+
+            Blocks = new Boolean[5][];
+            for (int c = 0; c < Blocks.Length; c++) {
+                Blocks[c] = new Boolean[5];
+                for (int r = 0; r < Blocks[c].Length; r++) {
+                    if (((c == 0 || c == 4) && r == 0) || (c != 0 && c != 4 && r == 4))
+                        Blocks[c][r] = false;
+                    else
+                        Blocks[c][r] = true;
+                }
+            }
+
+            Location.Width = Blocks.Length * blockLocation.Width;
+            Location.Height = Blocks[0].Length * blockLocation.Height;
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            for (int c = 0; c < Blocks.Length; c++) {
+                for (int r = 0; r < Blocks[c].Length; r++) {
+                    if (Blocks[c][r]) {
+                        blockLocation.X = Location.X + c * blockLocation.Width;
+                        blockLocation.Y = Location.Y + r * blockLocation.Height;
+                        spriteBatch.Draw(Sprites.SpriteSheet, blockLocation, Sprites.Solid, Color.ForestGreen);
+                    }
+                }
+            }
+        
         }
     }
 }
