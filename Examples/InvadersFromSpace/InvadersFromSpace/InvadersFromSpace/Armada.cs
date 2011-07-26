@@ -62,7 +62,7 @@ namespace InvadersFromSpace {
             }
         }
 
-        public void UpdateArmadaLocation() {
+        public Boolean UpdateArmadaLocation() {
             ArmadaLocation.X = 0;
             ArmadaLocation.Y = 0;
             ArmadaLocation.Width = 0;
@@ -93,7 +93,10 @@ namespace InvadersFromSpace {
             if (killed == Invaders.Length * Invaders[0].Length) {
                 GameMessage.SetMessage("Next Wave");
                 Reset();
+                return true;
             }
+
+            return false;
         }
 
         public void Update(GameTime gameTime) {

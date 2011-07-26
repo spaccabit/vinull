@@ -65,7 +65,7 @@ namespace InvadersFromSpace {
             lives.Reset(3);
             player.Reset();
             armada.Reset();
-            for (int i = 0; i < shields.Length; i++) 
+            for (int i = 0; i < shields.Length; i++)
                 shields[i].Reset();
         }
 
@@ -81,8 +81,10 @@ namespace InvadersFromSpace {
                             if (armada.Invaders[c][r].Location.Intersects(player.Shot.Location) || armada.Invaders[c][r].Location.Contains(player.Shot.Location)) {
                                 armada.Invaders[c][r].Active = false;
                                 player.Shot.Active = false;
-                                armada.UpdateArmadaLocation();
                                 score.AddPoints(10);
+                                if (armada.UpdateArmadaLocation())
+                                    for (int i = 0; i < shields.Length; i++)
+                                        shields[i].Reset();
                                 break;
                             }
                             if (armada.Invaders[c][r].Location.Intersects(player.Location)) {
@@ -94,20 +96,38 @@ namespace InvadersFromSpace {
             }
 
             for (int i = 0; i < armada.Missles.Length; i++) {
-                if (armada.Missles[i].Active && armada.Missles[i].Location.Intersects(player.Location)) {
-                    lives.Count--;
-                    if (lives.Count >= 0) {
-                        GameMessage.SetMessage(String.Format("Lives Left: {0}", lives.Count));
-                    }
-                    else {
-                        GameOver();
+                if (armada.Missles[i].Active) {
+                    if (armada.Missles[i].Location.Intersects(player.Location)) {
+                        lives.Count--;
+                        if (lives.Count >= 0) {
+                            GameMessage.SetMessage(String.Format("Lives Left: {0}", lives.Count));
+                        }
+                        else {
+                            GameOver();
+                        }
+
+                        player.Shot.Active = false;
+                        for (int j = 0; j < armada.Missles.Length; j++)
+                            armada.Missles[j].Active = false;
+                        break;
                     }
 
-                    player.Shot.Active = false;
-                    for (int j = 0; j < armada.Missles.Length; j++)
-                        armada.Missles[j].Active = false;
+                    for (int j = 0; j < shields.Length; j++) {
+                        if (shields[j].CollisionDetection(armada.Missles[i].Location, true)) {
+                            armada.Missles[i].Active = false;
+                        }
+                    }
+                }
+            }
+
+            for (int i = 0; i < shields.Length; i++) {
+                if (armada.ArmadaLocation.Intersects(shields[i].Location)) {
+                    for (int j = 0; j < shields.Length; j++)
+                        shields[j].Active = false;
                     break;
                 }
+                else if (player.Shot.Active && shields[i].CollisionDetection(player.Shot.Location, false))
+                    player.Shot.Active = false;
             }
         }
 
