@@ -14,13 +14,16 @@ namespace InvadersFromSpace {
         public Rectangle Field;
         public Bullet Shot;
         public Boolean Hit;
+        Double shotTime;
 
         const Double CannonSpeed = 0.2;
         const Double BulletSpeed = 0.4;
+        const Double ShotReload = 250;
 
         public PlayerCannon(Rectangle field) {
             Field = field;
             Hit = false;
+            shotTime = 0;
 
             Location.X = Field.X;
             Location.Y = Field.Y + Field.Height - Sprites.PlayerCannon.Height;
@@ -39,13 +42,15 @@ namespace InvadersFromSpace {
         }
 
         private void UpdateShot(GameTime gameTime, KeyboardState keys) {
+            shotTime -= gameTime.ElapsedGameTime.TotalMilliseconds;
             if (Shot.Active) {
                 Shot.Location.Y -= (Int32)(gameTime.ElapsedGameTime.TotalMilliseconds * BulletSpeed);
 
                 if (Shot.Location.Y < Field.Y)
                     Shot.Active = false;
             }
-            else if (keys.IsKeyDown(Keys.Space)) {
+            else if (keys.IsKeyDown(Keys.Space) && shotTime < 0) {
+                shotTime = ShotReload;
                 Shot.Active = true;
                 Shot.Location.Y = Location.Y - Sprites.Bullet.Height;
                 Shot.Location.X = Location.X + Location.Width / 2 - Sprites.Bullet.Width / 2;
@@ -70,6 +75,7 @@ namespace InvadersFromSpace {
 
         internal void Reset() {
             Hit = false;
+            shotTime = 0;
 
             Location.X = Field.X;
             Location.Y = Field.Y + Field.Height - Sprites.PlayerCannon.Height;

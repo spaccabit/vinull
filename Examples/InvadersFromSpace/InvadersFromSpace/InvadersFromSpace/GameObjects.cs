@@ -123,18 +123,20 @@ namespace InvadersFromSpace.Objects {
 
     public struct Shield {
 
+        public Boolean Active;
         public Boolean[][] Blocks;
         public Rectangle Location;
         Rectangle blockLocation;
 
         public void Reset() {
+            Active = true;
             blockLocation = new Rectangle(0, 0, 8, 9);
 
             Blocks = new Boolean[5][];
             for (int c = 0; c < Blocks.Length; c++) {
                 Blocks[c] = new Boolean[5];
                 for (int r = 0; r < Blocks[c].Length; r++) {
-                    if (((c == 0 || c == 4) && r == 0) || (c != 0 && c != 4 && r == 4))
+                    if (((c == 0 || c == 4) && r == 0) || (c > 0 && c < 4 && r == 4))
                         Blocks[c][r] = false;
                     else
                         Blocks[c][r] = true;
@@ -145,17 +147,39 @@ namespace InvadersFromSpace.Objects {
             Location.Height = Blocks[0].Length * blockLocation.Height;
         }
 
-        public void Draw(SpriteBatch spriteBatch) {
-            for (int c = 0; c < Blocks.Length; c++) {
-                for (int r = 0; r < Blocks[c].Length; r++) {
-                    if (Blocks[c][r]) {
-                        blockLocation.X = Location.X + c * blockLocation.Width;
-                        blockLocation.Y = Location.Y + r * blockLocation.Height;
-                        spriteBatch.Draw(Sprites.SpriteSheet, blockLocation, Sprites.Solid, Color.ForestGreen);
+        public Boolean CollisionDetection(Rectangle rect, Boolean FromTop) {
+            if (rect.Intersects(Location)) {
+                for (int c = FromTop ? 0 : Blocks.Length - 1; 
+                    FromTop && c < Blocks.Length || !FromTop && c >= 0;) {
+                    for (int r = 0; r < Blocks[c].Length; r++) {
+                        if (Blocks[c][r]) {
+                            blockLocation.X = Location.X + c * blockLocation.Width;
+                            blockLocation.Y = Location.Y + r * blockLocation.Height;
+                            if (blockLocation.Intersects(rect)) {
+                                Blocks[c][r] = false;
+                                return true;
+                            }
+                        }
                     }
+                    if (FromTop) c++; else c--;
                 }
             }
-        
+            
+            return false;
+        }
+
+        public void Draw(SpriteBatch spriteBatch) {
+            if (Active)
+                for (int c = 0; c < Blocks.Length; c++) {
+                    for (int r = 0; r < Blocks[c].Length; r++) {
+                        if (Blocks[c][r]) {
+                            blockLocation.X = Location.X + c * blockLocation.Width;
+                            blockLocation.Y = Location.Y + r * blockLocation.Height;
+                            spriteBatch.Draw(Sprites.SpriteSheet, blockLocation, Sprites.Solid, Color.ForestGreen);
+                        }
+                    }
+                }
+
         }
     }
 }
