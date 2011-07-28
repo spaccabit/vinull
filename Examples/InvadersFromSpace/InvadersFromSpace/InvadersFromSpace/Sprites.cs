@@ -17,11 +17,17 @@ namespace InvadersFromSpace {
         public static Rectangle Bullet = new Rectangle(51, 0, 5, 16);
         public static Rectangle Solid = new Rectangle(73, 1, 34, 34);
         public static Rectangle Moon = new Rectangle(0, 237, 256, 19);
-        
+
         public static Rectangle[] Invader1 = new Rectangle[] {
             new Rectangle(113, 10, 26, 22),
             new Rectangle(149, 10, 26, 22)
         };
 
+        public static void LoadContent(Microsoft.Xna.Framework.Content.ContentManager Content) {
+            SpriteSheet = Content.Load<Texture2D>("SpriteSheet");
+            Starfield = Content.Load<Texture2D>("Starfield");
+            ScoreFont = Content.Load<SpriteFont>("ScoreFont");
+            MessageFont = Content.Load<SpriteFont>("MessageFont");
+        }
     }
 }
