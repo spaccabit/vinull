@@ -73,7 +73,7 @@ namespace InvadersFromSpace {
             Shot.Draw(spriteBatch);
         }
 
-        internal void Reset() {
+        public void Reset() {
             Hit = false;
             shotTime = 0;
 

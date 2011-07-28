@@ -44,10 +44,7 @@ namespace InvadersFromSpace {
 
         protected override void LoadContent() {
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            Sprites.SpriteSheet = Content.Load<Texture2D>("SpriteSheet");
-            Sprites.Starfield = Content.Load<Texture2D>("Starfield");
-            Sprites.ScoreFont = Content.Load<SpriteFont>("ScoreFont");
-            Sprites.MessageFont = Content.Load<SpriteFont>("MessageFont");
+            Sprites.LoadContent(Content);
         }
 
         protected override void Update(GameTime gameTime) {
@@ -67,7 +64,8 @@ namespace InvadersFromSpace {
         protected override void Draw(GameTime gameTime) {
             GraphicsDevice.Clear(Color.Black);
 
-            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, DepthStencilState.Default, RasterizerState.CullNone);
+            spriteBatch.Begin(SpriteSortMode.Immediate, BlendState.AlphaBlend, SamplerState.PointWrap, 
+                              DepthStencilState.Default, RasterizerState.CullNone);
             bg.Draw(spriteBatch);
             lvl.Draw(spriteBatch);
             if (GameMessage.Active)

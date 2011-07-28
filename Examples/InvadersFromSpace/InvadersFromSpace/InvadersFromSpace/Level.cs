@@ -35,7 +35,8 @@ namespace InvadersFromSpace {
             for (int i = 0; i < shields.Length; i++) {
                 shields[i].Reset();
                 shields[i].Location.Y = field.Height + field.Y - 90;
-                shields[i].Location.X = field.Width + field.X - field.Width / shields.Length * i - field.Width / shields.Length / 2 - shields[i].Location.Width / 2;
+                shields[i].Location.X = field.Width + field.X - field.Width / shields.Length * i - 
+                                        field.Width / shields.Length / 2 - shields[i].Location.Width / 2;
             }
         }
 
@@ -70,15 +71,16 @@ namespace InvadersFromSpace {
         }
 
         private void CollisionDetection() {
+
+            /* test player and aramda */
             if (armada.Landed && !player.Hit)
                 GameOver();
             else if (armada.ArmadaLocation.Intersects(player.Location) ||
-                    (player.Shot.Active &&
-                    (armada.ArmadaLocation.Intersects(player.Shot.Location) || armada.ArmadaLocation.Contains(player.Shot.Location)))) {
+                    (player.Shot.Active && armada.ArmadaLocation.Intersects(player.Shot.Location))) {
                 for (int c = 0; c < armada.Invaders.Length; c++)
                     for (int r = 0; r < armada.Invaders[c].Length; r++) {
                         if (armada.Invaders[c][r].Active) {
-                            if (armada.Invaders[c][r].Location.Intersects(player.Shot.Location) || armada.Invaders[c][r].Location.Contains(player.Shot.Location)) {
+                            if (armada.Invaders[c][r].Location.Intersects(player.Shot.Location)) {
                                 armada.Invaders[c][r].Active = false;
                                 player.Shot.Active = false;
                                 score.AddPoints(10);
@@ -95,6 +97,7 @@ namespace InvadersFromSpace {
                     }
             }
 
+            /* test invader missles */
             for (int i = 0; i < armada.Missles.Length; i++) {
                 if (armada.Missles[i].Active) {
                     if (armada.Missles[i].Location.Intersects(player.Location)) {
@@ -120,6 +123,7 @@ namespace InvadersFromSpace {
                 }
             }
 
+            /* test shields */
             for (int i = 0; i < shields.Length; i++) {
                 if (armada.ArmadaLocation.Intersects(shields[i].Location)) {
                     for (int j = 0; j < shields.Length; j++)
