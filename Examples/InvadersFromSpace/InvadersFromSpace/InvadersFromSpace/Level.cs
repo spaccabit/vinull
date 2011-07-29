@@ -84,9 +84,12 @@ namespace InvadersFromSpace {
                                 armada.Invaders[c][r].Active = false;
                                 player.Shot.Active = false;
                                 score.AddPoints(10);
-                                if (armada.UpdateArmadaLocation())
+                                if (armada.UpdateArmada() == 0) {
+                                    armada.Reset();
                                     for (int i = 0; i < shields.Length; i++)
                                         shields[i].Reset();
+                                    GameMessage.SetMessage("Next Wave");
+                                }
                                 break;
                             }
                             if (armada.Invaders[c][r].Location.Intersects(player.Location)) {
