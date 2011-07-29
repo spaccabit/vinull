@@ -62,12 +62,12 @@ namespace InvadersFromSpace {
             }
         }
 
-        public Boolean UpdateArmadaLocation() {
+        public Int32 UpdateArmada() {
             ArmadaLocation.X = 0;
             ArmadaLocation.Y = 0;
             ArmadaLocation.Width = 0;
             ArmadaLocation.Height = 0;
-            double killed = 0;
+            Int32 killed = 0;
 
             for (int c = 0; c < Invaders.Length; c++)
                 for (int r = 0; r < Invaders[c].Length; r++) {
@@ -90,13 +90,7 @@ namespace InvadersFromSpace {
             double adj = 1 - MathHelper.Clamp((float)Math.Cos(MathHelper.PiOver2 * killed / (Invaders.Length * Invaders[0].Length - 1) + 0.20), 0, 1);
             ArmadaMoveRate = ArmadaStartingMoveRate - adj * (ArmadaStartingMoveRate - ArmadaEndingMoveRate);
 
-            if (killed == Invaders.Length * Invaders[0].Length) {
-                GameMessage.SetMessage("Next Wave");
-                Reset();
-                return true;
-            }
-
-            return false;
+            return Invaders.Length * Invaders[0].Length - killed;
         }
 
         public void Update(GameTime gameTime) {
@@ -185,7 +179,7 @@ namespace InvadersFromSpace {
                 for (int r = 0; r < Invaders[c].Length; r++)
                     Invaders[c][r].Active = true;
 
-            UpdateArmadaLocation();
+            UpdateArmada();
 
             Int32 xDelta = ArmadaLocation.X - (Field.X + Field.Width / 2 - ArmadaLocation.Width / 2);
             Int32 yDelta = ArmadaLocation.Y - Field.Y;
