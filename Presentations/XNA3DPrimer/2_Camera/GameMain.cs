@@ -15,6 +15,8 @@ namespace _2_Camera {
 
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
+        BasicEffect effect;
+
         VertexPositionColor[] diamond;
         VertexPositionColor[] diamondShadow;
         Camera camera;
@@ -24,7 +26,6 @@ namespace _2_Camera {
         float orbitRotation;
         float orbitSpin;
         float orbitScale;
-        BasicEffect effect;
 
         public GameMain() {
             graphics = new GraphicsDeviceManager(this);

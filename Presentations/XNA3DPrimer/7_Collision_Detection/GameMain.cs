@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Storage;
 namespace _7_Collision_Detection {
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
+        BasicEffect effect;
+
         Camera camera;
 
         VertexPositionColor[] diamond;
@@ -28,7 +30,6 @@ namespace _7_Collision_Detection {
         float robotRotation = 0f;
         Matrix robotTransform;
 
-
         public GameMain() {
             graphics = new GraphicsDeviceManager(this);
         }
@@ -39,6 +40,10 @@ namespace _7_Collision_Detection {
             graphics.ApplyChanges();
 
             Content.RootDirectory = "Content";
+
+            effect = new BasicEffect(graphics.GraphicsDevice);
+            effect.VertexColorEnabled = true;
+
             base.Initialize();
         }
 
@@ -47,6 +52,9 @@ namespace _7_Collision_Detection {
 
             camera = new Camera(robot.Bones["CameraPosition"].Transform,
                                 robot.Bones["CameraTarget"].Transform);
+
+            effect.Projection = camera.Projection;
+            effect.World = camera.World;
 
             diamond = new VertexPositionColor[] {
                 new VertexPositionColor(new Vector3(0, 0, 1), Color.Red),
@@ -114,23 +122,14 @@ namespace _7_Collision_Detection {
 
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-            graphics.GraphicsDevice.VertexDeclaration = new VertexDeclaration(
-                graphics.GraphicsDevice, VertexPositionColor.VertexElements);
 
-            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice, null);
-            effect.VertexColorEnabled = true;
             effect.View = diamondTransform * camera.View;
-            effect.Projection = camera.Projection;
-            effect.World = camera.World;
 
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
                     PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
             }
-            effect.End();
 
             foreach (BasicEffect rEffect in robot.Meshes["Robot"].Effects) {
                 rEffect.EnableDefaultLighting();

@@ -93,8 +93,6 @@ namespace _9_Timeline_Animation {
 
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-            graphics.GraphicsDevice.VertexDeclaration = new VertexDeclaration(
-                graphics.GraphicsDevice, VertexPositionColor.VertexElements);
 
             foreach (Effect effect in robot.Meshes["Robot"].Effects) {
                 effect.Parameters["Bones"].SetValue(robotTransforms);

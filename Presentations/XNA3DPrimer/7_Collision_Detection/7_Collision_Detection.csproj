@@ -173,9 +173,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Content\7_Collision_DetectionContent.contentproj">
-      <Project>{84FA5ACC-724A-432A-B95B-54DA63CF4602}</Project>
-      <Name>7_Collision_DetectionContent %28Content%29</Name>
+    <ProjectReference Include="..\XNA_3D_Primer_Content\XNA_3D_Primer_Content.contentproj">
+      <Project>{A97F3BE9-C69C-41E1-91B5-EA8E2C9FCBCF}</Project>
+      <Name>XNA_3D_Primer_Content</Name>
       <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
