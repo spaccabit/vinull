@@ -24,6 +24,7 @@ namespace _2_Camera {
         float orbitRotation;
         float orbitSpin;
         float orbitScale;
+        BasicEffect effect;
 
         public GameMain() {
             graphics = new GraphicsDeviceManager(this);
@@ -46,6 +47,12 @@ namespace _2_Camera {
             orbitRotation = 0f;
             orbitSpin = 0f;
             orbitScale = .2f;
+
+            effect = new BasicEffect(graphics.GraphicsDevice);
+            effect.VertexColorEnabled = true;
+            effect.Projection = camera.Projection;
+            effect.World = camera.World;
+
             base.Initialize();
         }
 
@@ -68,6 +75,7 @@ namespace _2_Camera {
             diamondShadow = new VertexPositionColor[diamond.Length];
             for (int i = 0; i < diamondShadow.Length; i++)
                 diamondShadow[i] = new VertexPositionColor(diamond[i].Position, Color.Black);
+
         }
 
         protected override void Update(GameTime gameTime) {
@@ -89,12 +97,7 @@ namespace _2_Camera {
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice);
-            effect.VertexColorEnabled = true;
-            effect.Projection = camera.Projection;
             effect.View = camera.View;
-            effect.World = camera.World;
-
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
                 pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
