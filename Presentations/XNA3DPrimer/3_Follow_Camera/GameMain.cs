@@ -14,7 +14,10 @@ using Microsoft.Xna.Framework.Storage;
 namespace _3_Follow_Camera {
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
+        BasicEffect effect;
+
         VertexPositionColor[] diamond;
+        VertexPositionColor[] diamondShadow; 
         Camera camera;
         Matrix shadow;
         Vector3 orbitAxis;
@@ -44,6 +47,12 @@ namespace _3_Follow_Camera {
             orbitRotation = 0f;
             orbitSpin = 0f;
             orbitScale = .2f;
+
+            effect = new BasicEffect(graphics.GraphicsDevice);
+            effect.VertexColorEnabled = true;
+            effect.Projection = camera.Projection;
+            effect.World = camera.World; 
+            
             base.Initialize();
         }
 
@@ -62,6 +71,10 @@ namespace _3_Follow_Camera {
                 new VertexPositionColor(new Vector3(0, 0, -1), Color.Green),
                 new VertexPositionColor(new Vector3(1, 0, 0), Color.Blue),
             };
+        
+            diamondShadow = new VertexPositionColor[diamond.Length];
+            for (int i = 0; i < diamondShadow.Length; i++)
+                diamondShadow[i] = new VertexPositionColor(diamond[i].Position, Color.Black);
         }
 
         protected override void Update(GameTime gameTime) {
@@ -82,23 +95,13 @@ namespace _3_Follow_Camera {
 
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-            graphics.GraphicsDevice.VertexDeclaration = new VertexDeclaration(
-                graphics.GraphicsDevice, VertexPositionColor.VertexElements);
 
-            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice, null);
-            effect.VertexColorEnabled = true;
-            effect.Projection = camera.Projection;
             effect.View = camera.View;
-            effect.World = camera.World;
-
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
                     PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
             }
-            effect.End();
 
             Matrix satellite = Matrix.Identity
                              * Matrix.CreateScale(orbitScale)
@@ -108,39 +111,26 @@ namespace _3_Follow_Camera {
 
             effect.View = satellite * camera.View;
 
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
                     PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
             }
-            effect.End();
 
-            // Render Shadow Effects
-            effect.EnableDefaultLighting();
-            effect.VertexColorEnabled = false;
-            effect.EmissiveColor = Color.Black.ToVector3();
-
+            // Render Shadow
             effect.View = shadow * camera.View;
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-                    PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
+                    PrimitiveType.TriangleStrip, diamondShadow, 0, diamondShadow.Length - 2);
             }
-            effect.End();
 
             effect.View = satellite * shadow * camera.View;
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
-                    PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
+                    PrimitiveType.TriangleStrip, diamondShadow, 0, diamondShadow.Length - 2);
             }
-            effect.End();
 
             base.Draw(gameTime);
         }

@@ -173,14 +173,14 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\XNA_3D_Primer_Content\XNA_3D_Primer_Content.contentproj">
+      <Project>{A97F3BE9-C69C-41E1-91B5-EA8E2C9FCBCF}</Project>
+      <Name>XNA_3D_Primer_Content</Name>
+      <XnaReferenceType>Content</XnaReferenceType>
+    </ProjectReference>
     <ProjectReference Include="..\XNA_3D_Primer_Pipeline.Content\XNA_3D_Primer_Pipeline.Content.csproj">
       <Project>{FDE47659-1691-472E-8826-3AA940ABFE2A}</Project>
       <Name>XNA_3D_Primer_Pipeline.Content</Name>
-    </ProjectReference>
-    <ProjectReference Include="Content\9_Timeline_AnimationContent.contentproj">
-      <Project>{E08F7230-F1D8-47CB-9421-9C0F23D09B94}</Project>
-      <Name>9_Timeline_AnimationContent %28Content%29</Name>
-      <XnaReferenceType>Content</XnaReferenceType>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

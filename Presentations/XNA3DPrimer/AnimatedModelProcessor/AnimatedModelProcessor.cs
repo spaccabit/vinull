@@ -45,15 +45,15 @@ namespace XNA_3D_Primer_Pipeline.Processors {
             return model;
         }
 
-        protected override MaterialContent ConvertMaterial(MaterialContent material, ContentProcessorContext context) {
-            String effectFile = Path.GetFullPath("Animation.fx");
-            EffectMaterialContent effectMaterial = new EffectMaterialContent();
-            effectMaterial.Effect = new ExternalReference<EffectContent>(effectFile);
+        //protected override MaterialContent ConvertMaterial(MaterialContent material, ContentProcessorContext context) {
+        //    String effectFile = Path.GetFullPath("Animation.fx");
+        //    EffectMaterialContent effectMaterial = new EffectMaterialContent();
+        //    effectMaterial.Effect = new ExternalReference<EffectContent>(effectFile);
 
-            foreach (var texture in material.Textures)
-                effectMaterial.Textures.Add(texture.Key, texture.Value);
+        //    foreach (var texture in material.Textures)
+        //        effectMaterial.Textures.Add(texture.Key, texture.Value);
 
-            return base.ConvertMaterial(effectMaterial, context);
-        }
+        //    return base.ConvertMaterial(effectMaterial, context);
+        //}
     }
 }

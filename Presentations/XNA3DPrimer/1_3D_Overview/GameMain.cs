@@ -14,6 +14,8 @@ using Microsoft.Xna.Framework.Storage;
 namespace _1_3D_Overview {
     public class GameMain : Microsoft.Xna.Framework.Game {
         GraphicsDeviceManager graphics;
+        BasicEffect effect;
+
         VertexPositionColor[] diamond;
         Matrix cameraProjection, cameraView;
 
@@ -31,6 +33,12 @@ namespace _1_3D_Overview {
 
             cameraView = Matrix.CreateLookAt(
                 new Vector3(0, 0, 4), Vector3.Zero, Vector3.Up);
+
+            effect = new BasicEffect(graphics.GraphicsDevice);
+            effect.VertexColorEnabled = true;
+            effect.Projection = cameraProjection;
+            effect.View = cameraView;
+            effect.World = Matrix.Identity;
 
             base.Initialize();
         }
@@ -63,12 +71,6 @@ namespace _1_3D_Overview {
 
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice);
-            effect.VertexColorEnabled = true;
-            effect.Projection = cameraProjection;
-            effect.View = cameraView;
-            effect.World = Matrix.Identity;
 
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
                 pass.Apply();
