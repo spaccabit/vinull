@@ -39,7 +39,7 @@ namespace _7_Collision_Detection {
             graphics.PreferredBackBufferWidth = 450;
             graphics.ApplyChanges();
 
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "XNA_3D_Primer_Content";
 
             effect = new BasicEffect(graphics.GraphicsDevice);
             effect.VertexColorEnabled = true;
