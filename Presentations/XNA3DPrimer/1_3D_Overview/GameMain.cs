@@ -63,23 +63,18 @@ namespace _1_3D_Overview {
 
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
-            graphics.GraphicsDevice.VertexDeclaration = new VertexDeclaration(
-                graphics.GraphicsDevice, VertexPositionColor.VertexElements);
 
-            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice, null);
+            BasicEffect effect = new BasicEffect(graphics.GraphicsDevice);
             effect.VertexColorEnabled = true;
             effect.Projection = cameraProjection;
             effect.View = cameraView;
             effect.World = Matrix.Identity;
 
-            effect.Begin();
             foreach (EffectPass pass in effect.CurrentTechnique.Passes) {
-                pass.Begin();
+                pass.Apply();
                 effect.GraphicsDevice.DrawUserPrimitives<VertexPositionColor>(
                     PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
-                pass.End();
             }
-            effect.End();
 
             base.Draw(gameTime);
         }
