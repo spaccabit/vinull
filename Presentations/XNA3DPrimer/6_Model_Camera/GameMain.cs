@@ -28,7 +28,7 @@ namespace _6_Model_Camera {
             graphics.PreferredBackBufferWidth = 450;
             graphics.ApplyChanges();
 
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "XNA_3D_Primer_Content";
             base.Initialize();
         }
 

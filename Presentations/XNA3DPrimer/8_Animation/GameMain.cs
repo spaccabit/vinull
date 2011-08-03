@@ -31,7 +31,7 @@ namespace _8_Animation {
             graphics.ApplyChanges();
 
             camera = new Camera();
-            Content.RootDirectory = "Content";
+            Content.RootDirectory = "XNA_3D_Primer_Content";
 
             base.Initialize();
         }
