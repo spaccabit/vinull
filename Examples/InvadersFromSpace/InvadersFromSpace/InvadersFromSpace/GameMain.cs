@@ -29,9 +29,11 @@ namespace InvadersFromSpace {
 
         protected override void Initialize() {
             base.Initialize();
+            IsFixedTimeStep = false;
 
             graphics.PreferredBackBufferWidth = 640;
             graphics.PreferredBackBufferHeight = 480;
+            graphics.SynchronizeWithVerticalRetrace = true;
             graphics.ApplyChanges();
 
             Screen.Width = graphics.PreferredBackBufferWidth;
