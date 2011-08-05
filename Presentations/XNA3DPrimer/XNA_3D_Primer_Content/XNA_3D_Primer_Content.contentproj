@@ -39,6 +39,7 @@
       <Name>Robot</Name>
       <Importer>FbxImporter</Importer>
       <Processor>AnimatedModelProcessor</Processor>
+      <ProcessorParameters_DefaultEffect>SkinnedEffect</ProcessorParameters_DefaultEffect>
     </Compile>
   </ItemGroup>
   <ItemGroup>

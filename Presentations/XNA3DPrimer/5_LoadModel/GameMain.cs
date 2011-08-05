@@ -53,7 +53,7 @@ namespace _5_LoadModel {
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (BasicEffect effect in robot.Meshes["Robot"].Effects) {
+            foreach (SkinnedEffect effect in robot.Meshes["Robot"].Effects) {
                 effect.EnableDefaultLighting();
                 effect.EmissiveColor = Color.White.ToVector3();
                 effect.View = camera.View;

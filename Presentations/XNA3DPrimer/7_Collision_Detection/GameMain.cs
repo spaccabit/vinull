@@ -131,7 +131,7 @@ namespace _7_Collision_Detection {
                     PrimitiveType.TriangleStrip, diamond, 0, diamond.Length - 2);
             }
 
-            foreach (BasicEffect rEffect in robot.Meshes["Robot"].Effects) {
+            foreach (SkinnedEffect rEffect in robot.Meshes["Robot"].Effects) {
                 rEffect.EnableDefaultLighting();
                 rEffect.DirectionalLight0.Direction = Vector3.Transform(rEffect.DirectionalLight0.Direction, robotTransform);
                 rEffect.DirectionalLight1.Direction = Vector3.Transform(rEffect.DirectionalLight1.Direction, robotTransform);

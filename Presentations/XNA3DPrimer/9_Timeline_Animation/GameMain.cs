@@ -94,11 +94,13 @@ namespace _9_Timeline_Animation {
         protected override void Draw(GameTime gameTime) {
             graphics.GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            foreach (Effect effect in robot.Meshes["Robot"].Effects) {
-                effect.Parameters["Bones"].SetValue(robotTransforms);
-                effect.Parameters["View"].SetValue(camera.View);
-                effect.Parameters["Projection"].SetValue(camera.Projection);
-                effect.Parameters["World"].SetValue(robot.Bones["Robot"].Transform * camera.World);
+            foreach (SkinnedEffect effect in robot.Meshes["Robot"].Effects) {
+                effect.EnableDefaultLighting();
+                effect.EmissiveColor = Color.White.ToVector3();
+                effect.SetBoneTransforms(robotTransforms);
+                effect.View = camera.View;
+                effect.Projection = camera.Projection;
+                effect.World = robot.Bones["Robot"].Transform * camera.World;
             }
             robot.Meshes["Robot"].Draw();
 
