@@ -35,7 +35,7 @@ namespace LineArt {
                 connection.Y1 = source.Y1 + (source.Y2 - source.Y1) / (Double)steps * i;
                 connection.X2 = target.X1 + (target.X2 - target.X1) / (Double)steps * ((Double)steps - i);
                 connection.Y2 = target.Y1 + (target.Y2 - target.Y1) / (Double)steps * ((Double)steps - i);
-                graphArea.Children.Add(connection);
+                graph.Children.Add(connection);
             }
         }
 
