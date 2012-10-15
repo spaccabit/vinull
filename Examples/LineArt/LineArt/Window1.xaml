@@ -1,0 +1,8 @@
+﻿<Window x:Class="LineArt.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Line Art" Height="300" Width="300" Background="White" Foreground="Black">
+    <Canvas Name="graphArea">
+        
+    </Canvas>
+</Window>
