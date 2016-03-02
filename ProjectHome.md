@@ -1,0 +1,1 @@
+These projects are the repository of the presentation slides and code I use in my developer sessions, and also projects created for blog posts at my blog vinull.com
